@@ -1,0 +1,14 @@
+{
+  "name": "cs306-fp",
+  "version": "0.0.1",
+  "description": "Course project for CS306",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daniel Stefani",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^9.17.1"
+  }
+}
