@@ -61,13 +61,13 @@
 @font-face {
     font-family: "Cheri";
     src: local("Cheri"),
-    url("src/assets/fonts/cheri_regular.ttf") format("truetype");
+    url("public/fonts/cheri_regular.ttf") format("truetype");
 }
 
 @font-face {
     font-family: "Cheri Liney";
     src: local("Cheri Liney"),
-    url("src/assets/fonts/cheri_liney.ttf") format("truetype");
+    url("public/fonts/cheri_liney.ttf") format("truetype");
 }
 
 body {
