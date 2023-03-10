@@ -1,6 +1,6 @@
 import {createApp} from 'vue'
 import App from './App.vue'
-import '../public/css/main.css'
+import './assets/css/palette.css'
 import {initializeFirebase} from "@/services/FirebaseClient";
 import router from "@/router";
 

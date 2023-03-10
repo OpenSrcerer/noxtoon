@@ -61,25 +61,11 @@
 @font-face {
     font-family: "Cheri";
     src: local("Cheri"),
-    url("public/fonts/cheri_regular.ttf") format("truetype");
+    url("@/assets/fonts/cheri_regular.ttf") format("truetype");
 }
 
 @font-face {
     font-family: "Cheri Liney";
     src: local("Cheri Liney"),
-    url("public/fonts/cheri_liney.ttf") format("truetype");
-}
-
-body {
-    color: var(--color-text);
-    background: var(--nx-c-smoke);
-    transition: color 0.5s, background-color 0.5s;
-    line-height: 1.6;
-    font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    font-size: 15px;
-    font-weight: normal;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    url("@/assets/fonts/cheri_liney.ttf") format("truetype");
 }
