@@ -1,16 +1,11 @@
-<script setup lang="ts">
-import Header from "@/components/common/Header.vue";
-import Footer from "@/components/common/Footer.vue";
+<script setup>
+import Header from "@/components/nav/Header.vue";
+import {watchEffect} from "vue";
+
+watchEffect(() => document.title = "Noxtoon")
 </script>
 
 <template>
   <Header/>
-  <router-view class="content"/>
-  <Footer/>
+  <router-view/>
 </template>
-
-<style scoped>
-.content {
-  flex: 1;
-}
-</style>

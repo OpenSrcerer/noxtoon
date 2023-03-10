@@ -1,3 +1,11 @@
+/* Noxtoon Palette */
+:root {
+    --nx-c-orange: #ff711c;
+    --nx-c-gray-hover: #272727;
+    --nx-c-smoke: #d2ceca;
+    --nx-c-near-black: #0f0f0f;
+}
+
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
     --vt-c-white: #ffffff;
@@ -50,18 +58,21 @@
     }
 }
 
-/**,*/
-/**::before,*/
-/**::after {*/
-/*    box-sizing: border-box;*/
-/*    margin: 0;*/
-/*    position: relative;*/
-/*    font-weight: normal;*/
-/*}*/
+@font-face {
+    font-family: "Cheri";
+    src: local("Cheri"),
+    url("src/assets/fonts/cheri_regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Cheri Liney";
+    src: local("Cheri Liney"),
+    url("src/assets/fonts/cheri_liney.ttf") format("truetype");
+}
 
 body {
     color: var(--color-text);
-    background: var(--color-background);
+    background: var(--nx-c-smoke);
     transition: color 0.5s, background-color 0.5s;
     line-height: 1.6;
     font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,

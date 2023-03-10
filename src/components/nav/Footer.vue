@@ -1,7 +1,7 @@
 <template>
   <div id="footer-container">
     <hr>
-    <h5>Copyright 2023 - Noxtoon</h5>
+    <h5>© Copyright 2023 - Noxtoon. All cartoons belong to their respective owners.</h5>
   </div>
 </template>
 
@@ -9,7 +9,12 @@
 </script>
 
 <style scoped>
+hr {
+  width: 95vw;
+}
+
 h5 {
   text-align: center;
+  height: 3em;
 }
 </style>
