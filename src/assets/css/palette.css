@@ -44,6 +44,11 @@
     --section-gap: 160px;
 }
 
+/* distances & container sizes */
+:root {
+    --content-box-size: 80vw;
+}
+
 @media (prefers-color-scheme: dark) {
     :root {
         --color-background: var(--vt-c-black);

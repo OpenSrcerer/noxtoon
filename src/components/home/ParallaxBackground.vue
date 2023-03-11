@@ -2,7 +2,7 @@
   <div id="parallax-container" class="parallax" ref="container">
 
     <img src="../../assets/parallax/logo-wide.png"
-         data-rellax-speed="-3"
+         data-rellax-speed="-4"
          id="logo-wide"
     />
 
@@ -63,7 +63,7 @@ onMounted(() => {
 <style scoped>
 .parallax {
   position: absolute;
-  width: 80vw;
+  width: 100em;
 }
 
 #logo-wide {
@@ -98,7 +98,7 @@ onMounted(() => {
 
 #layer-3 {
   z-index: 30;
-  top: -10vh;
+  top: -20vh;
   left: 40vw;
 }
 
@@ -111,12 +111,11 @@ onMounted(() => {
 #layer-5 {
   z-index: 10;
   top: -10vh;
-  width: 100vw;
 }
 
 #parallax-container {
-  width: 100vw;
-  height: 50vh;
+  width: 100%;
+  height: 20em;
 }
 
 /*#parallax-container > :not(:first-child) {*/
