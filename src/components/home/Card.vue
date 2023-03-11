@@ -21,7 +21,7 @@ interface Props {
 const props = defineProps<Props>()
 const src = computed(() => {
   const path = new URL('@/assets/img/cartoons', import.meta.url);
-  return `${path}/${props.image}.png`
+  return `${path.pathname}/${props.image}.png`
 });
 </script>
 
