@@ -1,6 +1,6 @@
 <template>
   <div class="card-container">
-    <img :src="`src/assets/img/cartoons/${image}.png`"/>
+    <img :src="cartoonImg(image)"/>
     <div class="card-content">
       <h3>{{ name }}</h3>
       <p>{{ description }}</p>
@@ -9,6 +9,8 @@
 </template>
 
 <script setup lang="ts">
+import {cartoonImg} from "@/components/composables/ImageUtils";
+
 interface Props {
   name: String,
   description: String
