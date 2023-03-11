@@ -46,7 +46,8 @@
 
 /* distances & container sizes */
 :root {
-    --content-box-size: 80vw;
+    --content-box-width: 80vw;
+    --content-min-height: 40em;
 }
 
 @media (prefers-color-scheme: dark) {

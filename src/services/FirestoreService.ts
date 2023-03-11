@@ -1,4 +1,4 @@
-import {addDoc, collection} from "firebase/firestore";
+import {getDocs, addDoc, collection} from "firebase/firestore";
 import type {Firestore} from "@firebase/firestore"
 
 let firestore: Firestore;
@@ -9,4 +9,8 @@ export const setFirestore = (fstore: Firestore) => {
 
 export const testDoc = async () => {
     return addDoc(collection(firestore, "teachers"), {name: "test", lastname: "test"})
+}
+
+export const getCartoons = async () => {
+    return getDocs(collection(firestore, "cartoons"))
 }

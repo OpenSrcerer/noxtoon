@@ -10,7 +10,7 @@
 
 <style scoped>
 hr {
-  width: var(--content-box-size);
+  width: var(--content-box-width);
 }
 
 h5 {
