@@ -1,6 +1,6 @@
 <template>
   <div class="card-container">
-    <img :src="cartoonImg(image)"/>
+    <img :src="src"/>
     <div class="card-content">
       <h3>{{ name }}</h3>
       <p>{{ description }}</p>
@@ -9,7 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import {cartoonImg} from "@/components/composables/ImageUtils";
+
+import {computed} from "vue";
 
 interface Props {
   name: string,
@@ -18,6 +19,10 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const src = computed(() => {
+  const path = new URL('@/assets/img/cartoons', import.meta.url);
+  return `${path}/${props.image}.png`
+});
 </script>
 
 <style scoped>
