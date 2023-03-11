@@ -12,9 +12,9 @@
 import {cartoonImg} from "@/components/composables/ImageUtils";
 
 interface Props {
-  name: String,
-  description: String
-  image: String;
+  name: string,
+  description: string
+  image: string;
 }
 
 const props = defineProps<Props>()
