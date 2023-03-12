@@ -10,9 +10,10 @@
            v-if="cartoons.length"
       >
         <Card v-for="cartoon in cartoons"
+              :id="cartoon.id"
+              :slug="cartoon.slug"
               :name="cartoon.name"
               :description="cartoon.description"
-              :image="cartoon.image"
         />
       </div>
 
@@ -31,7 +32,7 @@ import Card from "@/components/home/Card.vue";
 
 const cartoons = ref([]);
 onMounted(async () => {
-  cartoons.value = (await getCartoons()).docs.map(doc => doc.data());
+  cartoons.value = (await getCartoons()).docs.map(doc => ({ ...doc.data(), id: doc.id }));
   // Keep the cartoon list with 2 per row
   if (cartoons.value.length % 2 !== 0) {
     cartoons.value.pop()

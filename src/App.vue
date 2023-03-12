@@ -1,8 +1,13 @@
 <script setup>
 import Header from "@/components/nav/Header.vue";
 import {watchEffect} from "vue";
+import {useRoute} from "vue-router";
 
-watchEffect(() => document.title = "Noxtoon")
+const routeName = useRoute().name
+watchEffect(
+    () => document.title = !routeName ? "Noxtoon" :
+        `Noxtoon - ${routeName.charAt(0).toUpperCase() + routeName.substring(1).toLowerCase()}`
+)
 </script>
 
 <template>
@@ -22,7 +27,6 @@ body {
 
 a {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
   transition: 0.4s;
 }
 

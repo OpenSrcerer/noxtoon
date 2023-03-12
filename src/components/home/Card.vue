@@ -1,32 +1,35 @@
 <template>
-  <div class="card-container">
+  <RouterLink :to="`${id}-${slug}`" class="card-container">
     <img :src="src"/>
     <div class="card-content">
       <h3>{{ name }}</h3>
       <p>{{ description }}</p>
     </div>
-  </div>
+  </RouterLink>
 </template>
 
 <script setup lang="ts">
 
 import {computed} from "vue";
 
-interface Props {
+interface CartoonProps {
+  id: string,
+  slug: string,
   name: string,
   description: string
-  image: string;
 }
 
-const props = defineProps<Props>()
+const props = defineProps<CartoonProps>()
 const src = computed(() => {
   const path = new URL('@/assets/img/cartoons', import.meta.url);
-  return `${path.pathname}/${props.image}.png`.replace("/@", "")
+  return `${path.pathname}/${props.slug}.png`.replace("/@", "")
 });
 </script>
 
 <style scoped>
   .card-container {
+    text-decoration: none;
+    color: var(--nx-c-smoke);
     display: flex;
     align-items: center;
     column-gap: 2em;
