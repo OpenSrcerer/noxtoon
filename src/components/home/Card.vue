@@ -1,9 +1,8 @@
 <template>
-  <RouterLink :to="`${slug}`" class="card-container">
+  <RouterLink :to="`/toon/${slug}`" class="card-container">
     <img :src="src"/>
     <div class="card-content">
-      <h3>{{ name }}</h3>
-      <p>{{ description }}</p>
+      <h2>{{ name }}</h2>
     </div>
   </RouterLink>
 </template>
@@ -13,14 +12,19 @@
 import {computed} from "vue";
 import {getDynamicImage} from "@/components/composables/URLUtils";
 
-interface CartoonProps {
+interface Cartoon {
   id: string,
   slug: string,
   name: string,
-  description: string
+  age: number,
+  gender: string,
+  show: string,
+  description: string,
+  gradientStart: string,
+  gradientEnd: string
 }
 
-const props = defineProps<CartoonProps>()
+const props = defineProps<Cartoon>()
 const src = computed(() => getDynamicImage(props.slug, "cartoons"));
 </script>
 
@@ -29,15 +33,15 @@ const src = computed(() => getDynamicImage(props.slug, "cartoons"));
     text-decoration: none;
     color: var(--nx-c-smoke);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    column-gap: 2em;
     animation: opacityFadeIn 750ms;
-    width: 30em;
-    max-height: 30em;
+    width: 18em;
+    max-height: 20em;
     justify-content: space-evenly;
     text-align: left;
     border-radius: 1em;
-    padding: 3em;
+    padding: 1em;
     transition-duration: 0.4s;
     transition-property: all;
     transition-timing-function: ease;
@@ -50,17 +54,16 @@ const src = computed(() => getDynamicImage(props.slug, "cartoons"));
   }
 
   .card-container > img {
-    width: 50%;
-    max-height: 100%;
+    max-height: 75%;
   }
 
   @keyframes opacityFadeIn {
     0% {
-      margin-left: -10em;
+      margin-top: 10em;
       opacity: 0;
     }
     100% {
-      margin-left: 0;
+      margin-top: 0;
       opacity: 1;
     }
   }

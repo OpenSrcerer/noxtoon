@@ -39,17 +39,16 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from "vue";
+import {onBeforeMount, onMounted, onUnmounted, ref} from "vue";
 import Rellax from "rellax";
 
 const container = ref(null)
+const rellax = ref(null)
 
 onMounted(() => {
-  container.value.childNodes.forEach(node =>
-    node.classList.add("parallax")
-  )
+  container.value.childNodes.forEach(node => node.classList.add("parallax"))
 
-  new Rellax('.parallax', {
+  rellax.value = new Rellax('.parallax', {
     speed: 0,
     center: false,
     wrapper: null,
@@ -57,6 +56,10 @@ onMounted(() => {
     vertical: true,
     horizontal: false
   })
+})
+
+onUnmounted(() => {
+  rellax.value.destroy();
 })
 </script>
 
@@ -67,48 +70,49 @@ onMounted(() => {
 }
 
 #logo-wide {
-  position: fixed;
-  animation: fadeIn 750ms;
+  animation: logoSlideIn 750ms;
   width: 40vw;
   z-index: 21;
   top: 30vh;
   left: 30vw;
 }
 
-@keyframes fadeIn {
-  0% { top: 90vh; }
-  100% { top: 30vh }
-}
-
 #layer-0 {
+  animation: opacityFadeIn 250ms ease-out;
   top: 10vh;
   left: 30vw;
   z-index: 0;
 }
 
 #layer-1 {
+  animation: opacityFadeIn 300ms ease-out;
   top: -10vh;
   z-index: 10;
 }
 
 #layer-2 {
+  animation: opacityFadeIn 350ms ease-out;
   z-index: 20;
   top: 35vh;
 }
 
 #layer-3 {
+  animation: opacityFadeIn 400ms ease-out;
   z-index: 30;
   top: -20vh;
   left: 40vw;
 }
 
 #layer-4 {
+  animation: opacityFadeIn 450ms ease-out;
   z-index: 40;
   left: 70vw;
   bottom: -50vh;
 }
 
 #layer-5 {
+  background: linear-gradient(-45deg, v-bind(gradientStart), v-bind(gradientEnd));
+  animation: opacityFadeIn 500ms ease-out;
   z-index: 10;
   top: -10vh;
 }
@@ -116,5 +120,17 @@ onMounted(() => {
 #parallax-container {
   width: 100%;
   height: 20em;
+}
+
+/* Animation */
+
+@keyframes logoSlideIn {
+  0% { top: 90vh; }
+  100% { top: 30vh }
+}
+
+@keyframes opacityFadeIn {
+  0% { opacity: 0 }
+  100% { opacity: 1 }
 }
 </style>

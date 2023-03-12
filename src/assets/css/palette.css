@@ -2,6 +2,7 @@
 :root {
     --nx-c-orange: #ff711c;
     --nx-c-gray-hover: #272727;
+    --nx-c-gray-card-hover: #838280;
     --nx-c-smoke: #d2ceca;
     --nx-c-near-black: #0f0f0f;
 }
@@ -48,6 +49,11 @@
 :root {
     --content-box-width: 80vw;
     --content-min-height: 40em;
+}
+
+/* Remove Scroll Bar */
+::-webkit-scrollbar {
+    display: none;
 }
 
 @media (prefers-color-scheme: dark) {

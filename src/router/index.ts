@@ -10,7 +10,7 @@ const routes = [
         component: HomeView
     },
     {
-        path: '/cartoon/:slug',
+        path: '/toon/:slug',
         name: 'Profile',
         component: ProfileView,
         props: true
@@ -24,7 +24,13 @@ const routes = [
 
 const router = createRouter({
     history: createWebHistory(),
-    routes
+    routes,
+    scrollBehavior(to, from, savedPosition) {
+        if (to.name === from.name) {
+            return { top: 0, behavior: "smooth" }
+        }
+        return { top: 0, behavior: "auto" };
+    }
 })
 
 export default router

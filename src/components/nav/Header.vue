@@ -6,21 +6,23 @@
       </div>
 
       <div id="nav-header-container-right">
-        <RouterLink to="to">IDK</RouterLink>
-        <RouterLink to="to">WHAT</RouterLink>
-        <RouterLink to="to">TO</RouterLink>
-        <RouterLink to="to">PUT</RouterLink>
-        <RouterLink to="to">HERE</RouterLink>
+        <RouterLink to="/">IDK</RouterLink>
+        <RouterLink to="/">WHAT</RouterLink>
+        <RouterLink to="/">TO</RouterLink>
+        <RouterLink to="/">PUT</RouterLink>
+        <RouterLink to="/">HERE</RouterLink>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-const scrollToTop = () => window.scrollTo({
-  top: 0,
-  behavior: "smooth"
-});
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
 </script>
 
 <style scoped>
@@ -33,6 +35,7 @@ const scrollToTop = () => window.scrollTo({
 #nav-header-container-left > a {
   width: 6em;
   text-align: center;
+  will-change: scroll-position;
 }
 
 a {

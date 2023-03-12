@@ -18,7 +18,7 @@ watchEffect(
 <style>
 body {
   color: var(--color-text);
-  background: var(--nx-c-smoke);
+  background-color: var(--nx-c-near-black);
   transition: color 0.5s, background-color 0.5s;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

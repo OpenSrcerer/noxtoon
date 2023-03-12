@@ -1,9 +1,8 @@
 <template>
+  <GradientContentBox/>
   <ParallaxBackground/>
-
-  <div id="content">
-    <div id="waves"></div>
-    <div id="content-box">
+  <ContentBox>
+    <div id="inner-content-box">
       <h1>Meet the Noxtoon family!</h1>
 
       <div id="card-container"
@@ -16,11 +15,9 @@
               :description="cartoon.description"
         />
       </div>
-
     </div>
-
     <Footer/>
-  </div>
+  </ContentBox>
 </template>
 
 <script setup>
@@ -29,43 +26,28 @@ import Footer from "@/components/nav/Footer.vue";
 import {onMounted, ref} from "vue";
 import {getCartoons} from "@/services/FirestoreService";
 import Card from "@/components/home/Card.vue";
+import ContentBox from "@/components/containers/WavyContentBox.vue";
+import GradientContentBox from "@/components/containers/GradientContentBox.vue";
 
 const cartoons = ref([]);
-onMounted(async () => {
-  cartoons.value = (await getCartoons()).docs.map(doc => ({ ...doc.data(), id: doc.id }));
-  // Keep the cartoon list with 2 per row
-  if (cartoons.value.length % 2 !== 0) {
-    cartoons.value.pop()
-  }
-})
+onMounted(async () =>
+  cartoons.value = (await getCartoons())
+      .docs
+      .map(doc => ({ ...doc.data(), id: doc.id }))
+)
 </script>
 
 <style scoped>
-
-#waves {
-  width: 100%;
-  height: 3em;
-  position: relative;
-  bottom: 2.6em;
-  background-color: var(--nx-c-near-black);
-  --mask:
-      radial-gradient(54.08px at 50% 75.00px,#000 99%,#0000 101%) calc(50% - 60px) 0/120px 100%,
-      radial-gradient(54.08px at 50% -45px,#0000 99%,#000 101%) 50% 30px/120px 100% repeat-x;
-  -webkit-mask: var(--mask);
-  mask: var(--mask);
-}
-
-#content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+#wavy-content {
   position: relative;
   top: 33em;
-  background-color: var(--nx-c-near-black);
-  text-align: center;
 }
 
-#content-box {
+#gradient {
+  top: 0;
+}
+
+#inner-content-box {
   width: var(--content-box-width);
   min-height: var(--content-min-height)
 }
@@ -73,8 +55,13 @@ onMounted(async () => {
 #card-container {
   height: 100%;
   display: flex;
-  flex-wrap: wrap-reverse;
+  flex-wrap: wrap;
   column-gap: 8em;
-  justify-content: center;
+  justify-content: space-between;
+}
+
+#card-container::after {
+  content: "";
+  flex: auto;
 }
 </style>

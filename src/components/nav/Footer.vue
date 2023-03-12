@@ -11,6 +11,7 @@
 <style scoped>
 hr {
   width: var(--content-box-width);
+  border: 1px solid var(--nx-c-orange);
 }
 
 h5 {
