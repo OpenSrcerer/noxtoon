@@ -12,7 +12,8 @@ const routes = [
     {
         path: '/cartoon/:slug',
         name: 'Profile',
-        component: ProfileView
+        component: ProfileView,
+        props: true
     },
     {
         path: '/:pathMatch(.*)*',

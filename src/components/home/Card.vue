@@ -1,5 +1,5 @@
 <template>
-  <RouterLink :to="`${id}-${slug}`" class="card-container">
+  <RouterLink :to="`${slug}`" class="card-container">
     <img :src="src"/>
     <div class="card-content">
       <h3>{{ name }}</h3>
@@ -11,6 +11,7 @@
 <script setup lang="ts">
 
 import {computed} from "vue";
+import {getDynamicImage} from "@/components/composables/URLUtils";
 
 interface CartoonProps {
   id: string,
@@ -20,10 +21,7 @@ interface CartoonProps {
 }
 
 const props = defineProps<CartoonProps>()
-const src = computed(() => {
-  const path = new URL('@/assets/img/cartoons', import.meta.url);
-  return `${path.pathname}/${props.slug}.png`.replace("/@", "")
-});
+const src = computed(() => getDynamicImage(props.slug, "cartoons"));
 </script>
 
 <style scoped>
