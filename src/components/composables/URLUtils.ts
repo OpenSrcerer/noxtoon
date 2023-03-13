@@ -1,4 +1,4 @@
-export const getDynamicImage = (imageName: string, nestedPath= "") => {
+export const getDynamicImage = (imageName: string, nestedPath= "", extension = "png") => {
     const path = new URL('@/img/' + nestedPath, import.meta.url);
-    return `${path.pathname}/${imageName}.png`.replace("/@", "")
+    return `${path.pathname}/${imageName}.${extension}`.replace("/@", "")
 }
