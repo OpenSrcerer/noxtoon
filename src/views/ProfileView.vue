@@ -1,7 +1,7 @@
 <template>
-  <GradientContentBox v-if="cartoon"
-      :gradient-start="cartoon.gradientStart"
-      :gradient-end="cartoon.gradientEnd"
+  <GradientContentBox
+      v-if="cartoon"
+      :tile-color="cartoon.color"
   >
     <div id="profile-content">
       <img :src="src">
@@ -24,7 +24,7 @@ import ContentBox from "@/components/containers/WavyContentBox.vue";
 import Footer from "@/components/nav/Footer.vue";
 import {computed, onMounted, ref} from "vue";
 import {getCartoonBySlug} from "@/services/FirestoreService";
-import GradientContentBox from "@/components/containers/GradientContentBox.vue";
+import GradientContentBox from "@/components/containers/GradientTileContentBox.vue";
 import {getDynamicImage} from "@/components/composables/URLUtils";
 
 interface Cartoon {
@@ -35,8 +35,7 @@ interface Cartoon {
   gender: string,
   show: string,
   description: string,
-  gradientStart: string,
-  gradientEnd: string
+  color: string;
 }
 
 const props = defineProps<Cartoon>()
@@ -54,7 +53,7 @@ onMounted(async () => {
   display: flex;
   justify-content: left;
   align-items: center;
-  width: var(--content-box-width)
+  width: var(--content-box-width);
 }
 
 #profile-content > * {

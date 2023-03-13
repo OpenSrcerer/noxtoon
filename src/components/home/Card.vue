@@ -12,19 +12,12 @@
 import {computed} from "vue";
 import {getDynamicImage} from "@/components/composables/URLUtils";
 
-interface Cartoon {
-  id: string,
+interface Props {
   slug: string,
   name: string,
-  age: number,
-  gender: string,
-  show: string,
-  description: string,
-  gradientStart: string,
-  gradientEnd: string
 }
 
-const props = defineProps<Cartoon>()
+const props = defineProps<Props>()
 const src = computed(() => getDynamicImage(props.slug, "cartoons"));
 </script>
 

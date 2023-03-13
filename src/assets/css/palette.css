@@ -5,6 +5,7 @@
     --nx-c-gray-card-hover: #838280;
     --nx-c-smoke: #d2ceca;
     --nx-c-near-black: #0f0f0f;
+    --nx-c-transparent: rgba(0, 0, 0, 0);
 }
 
 /* color palette from <https://github.com/vuejs/theme> */
@@ -49,6 +50,7 @@
 :root {
     --content-box-width: 80vw;
     --content-min-height: 40em;
+    --custom-background-size: 5em;
 }
 
 /* Remove Scroll Bar */

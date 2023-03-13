@@ -9,10 +9,8 @@
            v-if="cartoons.length"
       >
         <Card v-for="cartoon in cartoons"
-              :id="cartoon.id"
               :slug="cartoon.slug"
               :name="cartoon.name"
-              :description="cartoon.description"
         />
       </div>
     </div>
@@ -27,7 +25,7 @@ import {onMounted, ref} from "vue";
 import {getCartoons} from "@/services/FirestoreService";
 import Card from "@/components/home/Card.vue";
 import ContentBox from "@/components/containers/WavyContentBox.vue";
-import GradientContentBox from "@/components/containers/GradientContentBox.vue";
+import GradientContentBox from "@/components/containers/GradientTileContentBox.vue";
 
 const cartoons = ref([]);
 onMounted(async () =>

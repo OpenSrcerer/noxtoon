@@ -39,6 +39,7 @@ const scrollToTop = () => {
 }
 
 a {
+  height: 100%;
   border-radius: 1px;
   color: var(--nx-c-near-black);
 }

@@ -25,6 +25,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-color: var(--nx-c-near-black);
   text-align: center;
 }
