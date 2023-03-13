@@ -1,21 +1,24 @@
 <template>
-  <GradientContentBox/>
-  <ParallaxBackground/>
-  <ContentBox>
-    <div id="inner-content-box">
-      <h1>Meet the Noxtoon family!</h1>
+  <div v-if="cartoons">
+    <GradientContentBox/>
+    <ParallaxBackground/>
+    <ContentBox>
+      <div id="inner-content-box">
+        <h1>Meet the Noxtoon family!</h1>
 
-      <div id="card-container"
-           v-if="cartoons.length"
-      >
-        <Card v-for="cartoon in cartoons"
-              :slug="cartoon.slug"
-              :name="cartoon.name"
-        />
+        <div id="card-container"
+             v-if="cartoons.length"
+        >
+          <Card v-for="cartoon in cartoons"
+                :slug="cartoon.slug"
+                :name="cartoon.name"
+          />
+        </div>
       </div>
-    </div>
-    <Footer/>
-  </ContentBox>
+      <Footer/>
+    </ContentBox>
+  </div>
+  <LoadingSpinner v-else/>
 </template>
 
 <script setup>
@@ -26,6 +29,7 @@ import {getCartoons} from "@/services/FirestoreService";
 import Card from "@/components/home/Card.vue";
 import ContentBox from "@/components/containers/WavyContentBox.vue";
 import GradientContentBox from "@/components/containers/GradientTileContentBox.vue";
+import LoadingSpinner from "@/components/nav/LoadingSpinner.vue";
 
 const cartoons = ref([]);
 onMounted(async () =>
@@ -36,13 +40,17 @@ onMounted(async () =>
 </script>
 
 <style scoped>
+#gt-content-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
 #wavy-content {
   position: relative;
   top: 33em;
-}
-
-#gradient {
-  top: 0;
 }
 
 #inner-content-box {

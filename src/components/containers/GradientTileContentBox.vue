@@ -28,11 +28,15 @@ const props = withDefaults(
 <style scoped>
 #gt-content-box {
   animation: backgroundOpacity 500ms;
-  position: absolute;
-  width: 100%;
-  height: 85%;
+  min-height: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .gradient-content-box {
