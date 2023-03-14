@@ -24,7 +24,7 @@ iframe {
   animation: slideIn 1s;
   transform: scale(2);
   overflow: hidden;
-  opacity: 0.5
+  opacity: 0.5;
 }
 
 @keyframes slideIn {

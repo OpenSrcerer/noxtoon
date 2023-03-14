@@ -5,9 +5,6 @@
   </div>
 </template>
 
-<script setup>
-</script>
-
 <style scoped>
 hr {
   width: var(--content-box-width);

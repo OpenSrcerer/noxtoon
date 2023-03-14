@@ -1,23 +1,32 @@
 <template>
-  <div class="button-w-counter"
-       @click="onClickHandler"
+  <div :id="type"
+       :style="buttonsClicked[type] ? 'background-color: #D2CECA;' : ''"
+       class="button-w-counter"
        ref="slotContainer"
+       @click="onClickHandler(type)"
   >
     <slot ref="slot"></slot>
-    <h5>{{ count }}</h5>
+    <h5 :style="buttonsClicked[type] ? 'color: #FF711C;' : ''">{{ count }}</h5>
   </div>
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, reactive, ref} from "vue";
 import type {ButtonClickDto} from "@/components/composables/ButtonClickDto";
 import {increment} from "firebase/firestore";
+
+type ButtonType = "heart" | "star";
 
 interface ButtonWithCounterProps {
   cartoonId: string;
   count: string;
   color: string;
-  type: "heart" | "star";
+  type: ButtonType;
+}
+
+interface ClickStorage {
+  heart: boolean;
+  star: boolean;
 }
 
 /* Props / Emits */
@@ -25,28 +34,26 @@ const props = defineProps<ButtonWithCounterProps>();
 const emit = defineEmits(['buttonClick'])
 
 /* Refs */
-const clicked = ref(false)
+const buttonsClicked = reactive<ClickStorage>({ heart: false, star: false })
 const slotContainer = ref<HTMLDivElement | null>(null)
 const animationMutex = ref(false)
 
 /* Computed Vals */
-const textColor = computed(() => clicked.value ? "#FF711C" : "#9E9C9C")
-const fillColor = computed(() => clicked.value ? "#0F0F0F" : props.color)
-const background = computed(() => clicked.value ? "#D2CECA" : "transparent")
+const fillColor = computed(() => buttonsClicked[props.type] ? "#0F0F0F" : props.color)
 
 /* LIKE / COMMENT HANDLING */
-const onClickHandler = () => {
+const onClickHandler = (target: ButtonType) => {
   if (animationMutex.value) { return; }
 
   // Event value: 1 (add like) / -1 (remove like)
-  const value = clicked.value ? -1 : 1;
+  const value = buttonsClicked[target] ? -1 : 1;
   const property = props.type === "heart" ? { hearts: increment(value) } : { stars: increment(value) };
   emit('buttonClick', <ButtonClickDto> { cartoonId: props.cartoonId, property })
-  saveLocalClickStatus(!clicked.value)
+  saveLocalClickStatus(target, !buttonsClicked[target])
 
   // Animation
   animationMutex.value = true;
-  clicked.value = !clicked.value;
+  buttonsClicked[target] = !buttonsClicked[target];
   animateClick()
 }
 
@@ -66,14 +73,14 @@ const animateClick = () => {
 }
 
 /* Local Storage */
-onMounted(() => clicked.value = getLocalClickStatus())
+onMounted(() => setLocalClickStatus(props.type))
 
-const getLocalClickStatus = () => {
-  return (localStorage.getItem(props.cartoonId) ?? "false") == "true"
+const setLocalClickStatus = (target: ButtonType) => {
+  buttonsClicked[target] = (localStorage.getItem(`${props.cartoonId}-${props.type}`) ?? "false") == "true"
 }
 
-const saveLocalClickStatus = (state: boolean) => {
-  localStorage.setItem(props.cartoonId, state.toString())
+const saveLocalClickStatus = (target: string, state: boolean) => {
+  localStorage.setItem(`${props.cartoonId}-${props.type}`, state.toString())
 }
 </script>
 
@@ -87,7 +94,6 @@ const saveLocalClickStatus = (state: boolean) => {
   padding-top: 1em;
   border-radius: 1em;
   transition: all ease-in-out 100ms;
-  background-color: v-bind(background);
 }
 
 .button-w-counter:hover {
@@ -109,7 +115,7 @@ const saveLocalClickStatus = (state: boolean) => {
   width: 3em;
   margin: 0.3em 0 0;
   font-size: 1.5em;
-  color: v-bind(textColor);
+  color: #9E9C9C;
   font-family: "Cheri Liney", Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
   Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }

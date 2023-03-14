@@ -1,42 +1,125 @@
 <template>
-  <div v-if="cartoons">
+  <div v-if="shownCartoons">
     <GradientContentBox/>
     <ParallaxBackground/>
     <ContentBox>
-      <div id="inner-content-box">
-        <h1>Meet the Noxtoon family!</h1>
-
-        <div id="card-container"
-             v-if="cartoons.length"
-        >
-          <Card v-for="cartoon in cartoons"
+      <ScrollDownTriangle/>
+      <h1>Meet the Noxtoon family!</h1>
+      <SearchBar @search="onSearch"/>
+      <br><br>
+      <SortingPicker @sort="onSort"/>
+      <br><br>
+      <div id="outer-content-box">
+        <div ref="refPage" id="inner-content-box">
+          <Card v-if="shownCartoons.length !== 0"
+                v-for="cartoon in shownCartoons"
                 :slug="cartoon.slug"
                 :name="cartoon.name"
+                :hearts="cartoon.hearts"
+                :stars="cartoon.stars"
           />
+          <h1 v-else id="no-results-placeholder">No results for "{{ searchString }}"</h1>
         </div>
       </div>
+
+      <PaginationControls
+          :total-pages="totalPages"
+          :current-page="currentPage"
+          :animation-mutex="animationMutex"
+          @next="loadPage(currentPage + 1)"
+          @prev="loadPage(currentPage - 1)"
+          @page="loadPage"
+      />
       <Footer/>
     </ContentBox>
   </div>
   <LoadingSpinner v-else/>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import ParallaxBackground from "@/components/home/ParallaxBackground.vue";
 import Footer from "@/components/nav/Footer.vue";
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import {getCartoons} from "@/services/FirestoreService";
 import Card from "@/components/home/Card.vue";
 import ContentBox from "@/components/containers/WavyContentBox.vue";
 import GradientContentBox from "@/components/containers/GradientTileContentBox.vue";
 import LoadingSpinner from "@/components/nav/LoadingSpinner.vue";
+import PaginationControls from "@/components/home/PaginationControls.vue";
+import SearchBar from "@/components/home/SearchBar.vue";
+import ScrollDownTriangle from "@/components/nav/ScrollDownTriangle.vue";
+import SortingPicker from "@/components/home/SortingPicker.vue";
 
-const cartoons = ref([]);
-onMounted(async () =>
-  cartoons.value = (await getCartoons())
-      .docs
-      .map(doc => ({ ...doc.data(), id: doc.id }))
-)
+/* ---- Constants ---- */
+const ITEMS_PER_PAGE = 3;
+const ANIMATION_LENGTH = 500;
+
+/* ------- Refs ------ */
+const cartoons = ref<Array<Record<any, any>>>([]);
+const searchString = ref<string>("")
+const sortString = ref<string>("name");
+const currentPage = ref(1);
+const totalPages = ref(0);
+const refPage = ref<HTMLDivElement>();
+const animationMutex = ref(false)
+
+/* ---- Computed ---- */
+const shownCartoons = computed(() => {
+  let toons = cartoons.value;
+  if (searchString.value.length != 0) {
+    toons = toons.filter(toon => toon.name.toLowerCase().includes(searchString.value.toLowerCase()))
+  }
+
+  toons = toons.sort((t1, t2) =>
+      sortString.value === 'name' ?
+          t1[sortString.value].toLowerCase().localeCompare(t2[sortString.value].toLowerCase()) :
+          parseInt(t2[sortString.value]) - parseInt(t1[sortString.value])
+  )
+  console.log(toons)
+
+  // Side effect that needs to be after filtering but before pagination
+  totalPages.value = Math.ceil(toons.length / ITEMS_PER_PAGE);
+
+  toons = toons.slice(ITEMS_PER_PAGE * (currentPage.value - 1), ITEMS_PER_PAGE * currentPage.value);
+  return toons
+})
+
+/* ------ Hooks ----- */
+onMounted(async () => updateCartoonList())
+
+/* ----- Methods ---- */
+const loadPage = async (page: number) => {
+  // Mutex Guard & Page limit guard
+  const animationAlreadyPlaying = animationMutex.value;
+  const pageOutOfBounds = page === 0 || page > totalPages.value;
+  const alreadyOnPage = currentPage.value === page;
+
+  if (animationAlreadyPlaying || pageOutOfBounds || alreadyOnPage) { return }
+  animationMutex.value = true; // Grab the mutex
+
+  const swipeClass = page > currentPage.value ? "swipeLeft" : "swipeRight";
+
+  refPage.value?.classList.add(swipeClass)
+  setTimeout(() => {
+    refPage.value?.classList.remove(swipeClass);
+    animationMutex.value = false; // Release the mutex
+  }, ANIMATION_LENGTH)
+  currentPage.value = page
+}
+
+const updateCartoonList = async () => {
+  const allCartoons = await getCartoons()
+  cartoons.value = allCartoons.docs.map(doc => ({...doc.data(), id: doc.id}));
+}
+
+const onSearch = (search: string) => {
+  searchString.value = search;
+  currentPage.value = 1;
+}
+
+const onSort = (sort: string) => {
+  sortString.value = sort
+}
 </script>
 
 <style scoped>
@@ -53,21 +136,66 @@ onMounted(async () =>
   top: 33em;
 }
 
+#outer-content-box {
+  animation: fadeSwipeIn 1s;
+}
+
 #inner-content-box {
   width: var(--content-box-width);
-  min-height: var(--content-min-height)
-}
-
-#card-container {
-  height: 100%;
+  min-height: 10em;
   display: flex;
   flex-wrap: wrap;
-  column-gap: 8em;
-  justify-content: space-between;
+  justify-content: space-around;
+  column-gap: 2em;
+  row-gap: 2em;
 }
 
-#card-container::after {
-  content: "";
-  flex: auto;
+#no-results-placeholder {
+  margin-top: 4.7em;
+  margin-bottom: 4.7em;
+}
+
+/* Page Animation */
+
+.swipeLeft {
+  animation: swipePageLeft v-bind(ANIMATION_LENGTH + "ms") !important;
+}
+
+.swipeRight {
+  animation: swipePageRight v-bind(ANIMATION_LENGTH + "ms") !important;
+}
+
+@keyframes fadeSwipeIn {
+  0% {
+    margin-top: 15em;
+    opacity: 0;
+  }
+
+  100% {
+    margin-top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes swipePageLeft {
+  0% {
+    margin-left: 100em;
+    opacity: 0;
+  }
+  100% {
+    margin-left: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes swipePageRight {
+  0% {
+    margin-left: -100em;
+    opacity: 0;
+  }
+  100% {
+    margin-left: 0;
+    opacity: 1;
+  }
 }
 </style>

@@ -26,7 +26,6 @@ const scrollToTop = () => {
 </script>
 
 <style scoped>
-
 #nav-header-container-right > a {
   width: 4em;
   text-align: center;

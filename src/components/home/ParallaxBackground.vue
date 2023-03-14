@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import {onBeforeMount, onMounted, onUnmounted, ref} from "vue";
+import {onMounted, onUnmounted, ref} from "vue";
 import Rellax from "rellax";
 
 const container = ref(null)
@@ -64,6 +64,12 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+#parallax-container {
+  height: 80%;
+  width: 100%;
+  overflow-y: hidden;
+}
+
 .parallax {
   position: absolute;
   width: 100em;
@@ -115,11 +121,6 @@ onUnmounted(() => {
   animation: opacityFadeIn 500ms ease-out;
   z-index: 10;
   top: -10vh;
-}
-
-#parallax-container {
-  width: 100%;
-  height: 20em;
 }
 
 /* Animation */
