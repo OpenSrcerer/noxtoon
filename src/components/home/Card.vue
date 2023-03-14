@@ -92,21 +92,18 @@ const src = computed(() => getDynamicImage(props.slug, "cartoons"));
     row-gap: .5em;
   }
 
-  .card-stats > svg {
-    width: 2em;
-  }
 
   .stat {
     display: flex;
     column-gap: .3em;
-    max-width: 5em;
+    max-width: 7em;
     border-radius: 3em;
     justify-content: center;
     position: relative;
     background-color: var(--nx-c-smoke);
     height: 3em;
-    bottom: 17em;
-    left: 12em;
+    bottom: 18em;
+    left: 11em;
   }
 
   .stat:last-child {
@@ -125,7 +122,7 @@ const src = computed(() => getDynamicImage(props.slug, "cartoons"));
   h3 {
     color: var(--nx-c-near-black);
     position: relative;
-    font-size: 1.8em;
+    font-size: 1.5em;
     margin: 0;
   }
 
@@ -134,7 +131,7 @@ const src = computed(() => getDynamicImage(props.slug, "cartoons"));
   }
 
   svg {
-    width: 2em;
-    margin: .3em .3em .3em 0;
+    width: 1.5em;
+    margin: .3em .1em .3em 0;
   }
 </style>

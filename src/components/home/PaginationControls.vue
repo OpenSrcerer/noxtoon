@@ -1,6 +1,6 @@
 <template>
   <div id="pagination-controls">
-    <h1 @click="onPrevious" class="side-nav">Prev</h1>
+    <h1 @click="onPrevious" class="side-nav">⬅</h1>
     <div v-if="totalPages <= 5" id="center-nav" ref="centerNav">
       <h1 v-for="page in totalPages" @click="emit('page', page)">
         {{ page }}
@@ -18,7 +18,7 @@
         {{ totalPages }}
       </h1>
     </div>
-    <h1 @click="onNext" class="side-nav">Next</h1>
+    <h1 @click="onNext" class="side-nav">➡</h1>
   </div>
 </template>
 
