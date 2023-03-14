@@ -37,7 +37,7 @@
           <h2>Age: <span class="claim">{{ cartoon.age ?? "Unknown" }}</span></h2>
           <h2>Gender: <span class="claim">{{ cartoon.gender ?? "Unknown" }}</span></h2>
           <h2>Show: <span class="claim">{{ cartoon.show ?? "Unknown" }}</span></h2>
-          <p>{{ cartoon.description }}</p>
+          <div v-html="cartoon.description"></div>
         </div>
       </div>
       <Footer/>
@@ -123,6 +123,10 @@ const retrieveCartoon = async () => {
 #profile-text-description {
   max-width: 40em;
   text-align: left;
+}
+
+#profile-text-description > div {
+  margin-top: 1em;
 }
 
 .claim {
