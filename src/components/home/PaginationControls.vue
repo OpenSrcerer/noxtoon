@@ -79,16 +79,11 @@ const onPageChangeEvent = () => {
 }
 
 const onPrevious = () => {
-  console.log('prev 1')
   if (props.currentPage === 1 || props.animationMutex) return;
-  console.log('prev 2')
   if (props.currentPage <= props.totalPages || props.currentPage > 4) {
     customPage.value = props.currentPage - 1
-    console.log('prev 3')
   }
-  console.log('prev 4')
   emit('prev')
-  console.log('prev 5')
 }
 
 const onNext = () => {
@@ -102,7 +97,7 @@ const onNext = () => {
 const pageChangeHandler = () => setTimeout(() => onPageChangeEvent(), 250)
 
 watch(customPage, onCustomPageType)
-// watch(props, pageChangeHandler)
+watch(props, pageChangeHandler)
 onMounted(pageChangeHandler)
 </script>
 
