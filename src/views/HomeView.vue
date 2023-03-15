@@ -94,15 +94,15 @@ const loadPage = async (page: number) => {
   const alreadyOnPage = currentPage.value === page;
 
   if (animationAlreadyPlaying || pageOutOfBounds || alreadyOnPage) { return }
-  // animationMutex.value = true; // Grab the mutex
-  //
-  // const swipeClass = page > currentPage.value ? "swipeLeft" : "swipeRight";
-  //
-  // refPage.value?.classList.add(swipeClass)
-  // setTimeout(() => {
-  //   refPage.value?.classList.remove(swipeClass);
-  //   animationMutex.value = false; // Release the mutex
-  // }, ANIMATION_LENGTH)
+  animationMutex.value = true; // Grab the mutex
+
+  const swipeClass = page > currentPage.value ? "swipeLeft" : "swipeRight";
+
+  refPage.value?.classList.add(swipeClass)
+  setTimeout(() => {
+    refPage.value?.classList.remove(swipeClass);
+    animationMutex.value = false; // Release the mutex
+  }, ANIMATION_LENGTH)
   currentPage.value = page
 }
 

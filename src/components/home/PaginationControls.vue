@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, reactive, ref, watch} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 
 interface PaginationControlsProps {
   currentPage: number;
@@ -80,7 +80,7 @@ const onPageChangeEvent = () => {
 
 const onPrevious = () => {
   if (props.currentPage === 1 || props.animationMutex) return;
-  if (props.currentPage <= props.totalPages || props.currentPage > 4) {
+  if (props.currentPage <= props.totalPages && props.currentPage > 4) {
     customPage.value = props.currentPage - 1
   }
   emit('prev')
