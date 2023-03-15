@@ -89,21 +89,28 @@ onMounted(async () => updateCartoonList())
 /* ----- Methods ---- */
 const loadPage = async (page: number) => {
   // Mutex Guard & Page limit guard
+  console.log('prev 5')
   const animationAlreadyPlaying = animationMutex.value;
   const pageOutOfBounds = page === 0 || page > totalPages.value;
   const alreadyOnPage = currentPage.value === page;
+  console.log('prev 6')
 
   if (animationAlreadyPlaying || pageOutOfBounds || alreadyOnPage) { return }
   animationMutex.value = true; // Grab the mutex
+  console.log('prev 7')
 
   const swipeClass = page > currentPage.value ? "swipeLeft" : "swipeRight";
+  console.log('prev 8')
 
   refPage.value?.classList.add(swipeClass)
+  console.log('prev 9')
   setTimeout(() => {
     refPage.value?.classList.remove(swipeClass);
     animationMutex.value = false; // Release the mutex
+    console.log('prev 10')
   }, ANIMATION_LENGTH)
   currentPage.value = page
+  console.log('prev 1')
 }
 
 const updateCartoonList = async () => {
