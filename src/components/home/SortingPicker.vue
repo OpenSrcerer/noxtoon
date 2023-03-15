@@ -37,7 +37,7 @@ import {ref} from "vue";
 
 const emit = defineEmits(['sort', 'direction'])
 const arrow = ref<HTMLDivElement>();
-const rotation = ref("180deg")
+const rotation = ref("0deg")
 const sortingValues = ref(['A', 'Z'])
 
 const onDirectionChange = () => {
