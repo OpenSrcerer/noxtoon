@@ -1,13 +1,5 @@
 <script setup>
 import Header from "@/components/nav/Header.vue";
-import {watchEffect} from "vue";
-import {useRoute} from "vue-router";
-
-const routeName = useRoute().name
-watchEffect(
-    () => document.title = !routeName ? "Noxtoon" :
-        `Noxtoon - ${routeName.charAt(0).toUpperCase() + routeName.substring(1).toLowerCase()}`
-)
 </script>
 
 <template>
@@ -43,8 +35,7 @@ body {
 
 html {
   font-size: 15px;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-  Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: var(--nx-f-inter);
   font-weight: normal;
   line-height: 1.6;
 }

@@ -67,7 +67,7 @@ onUnmounted(() => {
 #parallax-container {
   height: 80%;
   width: 100%;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 .parallax {
@@ -121,6 +121,7 @@ onUnmounted(() => {
   animation: opacityFadeIn 500ms ease-out;
   z-index: 10;
   top: -10vh;
+  width: 100%;
 }
 
 /* Animation */

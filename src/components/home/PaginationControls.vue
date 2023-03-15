@@ -168,8 +168,7 @@ input {
   color: var(--nx-c-smoke);
   border: none;
   outline: none;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-  Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
+  font-family: var(--nx-f-inter) !important;
   font-size: 2em;
   padding: 0 0.5em;
   margin-top: 0.5em;

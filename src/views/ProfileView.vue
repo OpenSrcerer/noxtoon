@@ -6,7 +6,6 @@
     <YoutubeVideo :src="cartoon.video"/>
     <h1>{{ cartoon.name }}</h1>
     <WavyContentBox>
-      <ScrollDownTriangle/>
       <div id="profile-content">
         <div id="likes-comments">
           <ButtonWithCounter color="#ED1940"
@@ -135,8 +134,7 @@ const retrieveCartoon = async () => {
 
 h1 {
   font-size: 6em;
-  font-family: "Cheri", Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-  Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;;
+  font-family: var(--nx-f-cheri);
   color: v-bind(cartoonColorLight);
   position: absolute;
   top: 1.75em;

@@ -4,11 +4,16 @@
     <ParallaxBackground/>
     <ContentBox>
       <ScrollDownTriangle/>
-      <h1>Meet the Noxtoon family!</h1>
+      <h2>Find all of your favorite cartoons on Noxtoon, quickly and easily.</h2>
+      <hr>
+      <br><br>
+      <h1 style="margin-bottom: 0">Cartoon Search</h1>
+
       <div id="search-sort-container">
-        <SortingPicker @sort="onSort" @direction="sortReverse = !sortReverse"/>
+        <SortingPicker @sort="onSort" @direction="onDirectionChange"/>
         <SearchBar @search="onSearch"/>
       </div>
+
       <div id="outer-content-box">
         <div ref="refPage" id="inner-content-box">
           <Card v-if="shownCartoons.length !== 0"
@@ -129,7 +134,7 @@ const onSort = (sort: string) => {
 }
 
 const onDirectionChange = () => {
-
+  sortReverse.value = !sortReverse.value
 }
 </script>
 
@@ -172,6 +177,11 @@ const onDirectionChange = () => {
   width: var(--content-box-width);
   margin-top: 2em;
   margin-bottom: 2em;
+}
+
+hr {
+  width: var(--content-box-width);
+  border: 1px solid var(--nx-c-orange);
 }
 
 /* Page Animation */

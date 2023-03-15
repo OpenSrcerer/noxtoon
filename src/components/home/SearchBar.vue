@@ -42,8 +42,7 @@ input {
   border: none;
   border-radius: .5em;
   /*outline: none;*/
-  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-  Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
+  font-family: var(--nx-f-inter) !important;
   max-height: 2em;
   transition: all 250ms ease-in-out;
 }

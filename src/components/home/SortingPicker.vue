@@ -9,13 +9,13 @@
 
       <div class="choice">
         <input type="radio" id="hearts" name="sorting_order" value="hearts"
-               @click="emit('sort', 'hearts'); sortingValues = ['0', '9']">
+               @click="emit('sort', 'hearts'); sortingValues = ['9', '0']">
         <label for="hearts">Hearts</label>
       </div>
 
       <div ref="arrow" class="choice">
         <input type="radio" id="stars" name="sorting_order" value="stars"
-               @click="emit('sort', 'stars'); sortingValues = ['0', '9']">
+               @click="emit('sort', 'stars'); sortingValues = ['9', '0']">
         <label for="stars">Stars</label>
       </div>
     </div>

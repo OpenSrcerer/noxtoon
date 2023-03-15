@@ -6,11 +6,8 @@
       </div>
 
       <div id="nav-header-container-right">
-        <RouterLink to="/">IDK</RouterLink>
-        <RouterLink to="/">WHAT</RouterLink>
-        <RouterLink to="/">TO</RouterLink>
-        <RouterLink to="/">PUT</RouterLink>
-        <RouterLink to="/">HERE</RouterLink>
+        <RouterLink to="/about">ABOUT</RouterLink>
+        <RouterLink to="/add-a-toon">ADD A TOON</RouterLink>
       </div>
     </div>
   </div>
@@ -27,7 +24,7 @@ const scrollToTop = () => {
 
 <style scoped>
 #nav-header-container-right > a {
-  width: 4em;
+  width: 6em;
   text-align: center;
 }
 
@@ -80,13 +77,13 @@ a:hover {
 
 #nav-header-container-left > a {
   margin-left: 2em;
-  font-family: "Cheri", serif;
+  font-family: var(--nx-f-cheri);
   font-size: 150%;
   height: inherit;
 }
 
 #nav-header-container-right > a {
-  font-family: "Cheri", serif;
+  font-family: var(--nx-f-cheri);
   font-size: 1.5em;
 }
 

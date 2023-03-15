@@ -2,6 +2,8 @@ import {createRouter, createWebHistory} from "vue-router";
 import FourOhFourView from "@/views/FourOhFourView.vue";
 import HomeView from "@/views/HomeView.vue";
 import ProfileView from "@/views/ProfileView.vue";
+import AddAToonView from "@/views/AddAToonView.vue";
+import AboutView from "@/views/AboutView.vue";
 
 const routes = [
     {
@@ -10,14 +12,24 @@ const routes = [
         component: HomeView
     },
     {
+        path: '/add-a-toon',
+        name: 'Add A Cartoon',
+        component: AddAToonView,
+    },
+    {
+        path: '/about',
+        name: 'About',
+        component: AboutView,
+    },
+    {
         path: '/toon/:slug',
-        name: 'Profile',
+        name: 'Toon Profile',
         component: ProfileView,
         props: true
     },
     {
         path: '/:pathMatch(.*)*',
-        name: 'NotFound',
+        name: '404',
         component: FourOhFourView
     },
 ]
@@ -32,5 +44,8 @@ const router = createRouter({
         return { top: 0, behavior: "auto" };
     }
 })
+router.afterEach((to, from) => {
+    document.title = (to.name) ? `Noxtoon -  ${String(to.name)}` : "Noxtoon";
+});
 
 export default router

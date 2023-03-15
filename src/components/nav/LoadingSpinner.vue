@@ -17,8 +17,7 @@
   }
 
   #loading-text {
-    font-family: "Cheri", Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: var(--nx-f-cheri);
     color: rgb(169, 169, 169);
     letter-spacing: 0.1em;
     position: absolute;
