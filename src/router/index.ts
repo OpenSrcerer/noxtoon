@@ -2,8 +2,8 @@ import {createRouter, createWebHistory} from "vue-router";
 import FourOhFourView from "@/views/FourOhFourView.vue";
 import HomeView from "@/views/HomeView.vue";
 import ProfileView from "@/views/ProfileView.vue";
-import AddAToonView from "@/views/AddAToonView.vue";
-import AboutView from "@/views/AboutView.vue";
+// import AddAToonView from "@/views/AddAToonView.vue";
+// import AboutView from "@/views/AboutView.vue";
 
 const routes = [
     {
@@ -11,16 +11,16 @@ const routes = [
         name: 'Home',
         component: HomeView
     },
-    {
-        path: '/add-a-toon',
-        name: 'Add A Cartoon',
-        component: AddAToonView,
-    },
-    {
-        path: '/about',
-        name: 'About',
-        component: AboutView,
-    },
+    // {
+    //     path: '/add-a-toon',
+    //     name: 'Add A Cartoon',
+    //     component: AddAToonView,
+    // },
+    // {
+    //     path: '/about',
+    //     name: 'About',
+    //     component: AboutView,
+    // },
     {
         path: '/toon/:slug',
         name: 'Toon Profile',
