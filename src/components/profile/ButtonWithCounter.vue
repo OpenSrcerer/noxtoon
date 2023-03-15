@@ -6,7 +6,7 @@
        @click="onClickHandler(type)"
   >
     <slot ref="slot"></slot>
-    <h5 :style="buttonsClicked[type] ? 'color: #FF711C;' : ''">{{ formatCompactNumber(count) }}</h5>
+    <h5 :style="buttonsClicked[type] ? 'color: #FF711C;' : ''">{{ formatCompactNumber(parseInt(count)) }}</h5>
   </div>
 </template>
 
