@@ -5,10 +5,10 @@
     <ContentBox>
       <ScrollDownTriangle/>
       <h1>Meet the Noxtoon family!</h1>
-      <SearchBar @search="onSearch"/>
-      <br><br>
-      <SortingPicker @sort="onSort"/>
-      <br><br>
+      <div id="search-sort-container">
+        <SortingPicker @sort="onSort" @direction="sortReverse = !sortReverse"/>
+        <SearchBar @search="onSearch"/>
+      </div>
       <div id="outer-content-box">
         <div ref="refPage" id="inner-content-box">
           <Card v-if="shownCartoons.length !== 0"
@@ -18,7 +18,10 @@
                 :hearts="cartoon.hearts"
                 :stars="cartoon.stars"
           />
-          <h1 v-else id="no-results-placeholder">No results for "{{ searchString }}"</h1>
+          <div v-else id="no-results-placeholder">
+            <h1>No results for "{{ searchString }}"</h1>
+            <p>Try refining your search query.</p>
+          </div>
         </div>
       </div>
 
@@ -58,6 +61,7 @@ const ANIMATION_LENGTH = 500;
 const cartoons = ref<Array<Record<any, any>>>([]);
 const searchString = ref<string>("")
 const sortString = ref<string>("name");
+const sortReverse = ref<boolean>(false);
 const currentPage = ref(1);
 const totalPages = ref(0);
 const refPage = ref<HTMLDivElement>();
@@ -75,6 +79,10 @@ const shownCartoons = computed(() => {
           t1[sortString.value].toLowerCase().localeCompare(t2[sortString.value].toLowerCase()) :
           parseInt(t2[sortString.value]) - parseInt(t1[sortString.value])
   )
+
+  if (sortReverse.value) {
+    toons = toons.reverse();
+  }
 
   // Side effect that needs to be after filtering but before pagination
   totalPages.value = Math.ceil(toons.length / ITEMS_PER_PAGE);
@@ -119,6 +127,10 @@ const onSearch = (search: string) => {
 const onSort = (sort: string) => {
   sortString.value = sort
 }
+
+const onDirectionChange = () => {
+
+}
 </script>
 
 <style scoped>
@@ -150,8 +162,16 @@ const onSort = (sort: string) => {
 }
 
 #no-results-placeholder {
-  margin-top: 4.7em;
-  margin-bottom: 4.7em;
+  margin-top: 7.77em;
+  margin-bottom: 7.77em;
+}
+
+#search-sort-container {
+  display: inline-flex;
+  justify-content: space-between;
+  width: var(--content-box-width);
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 /* Page Animation */

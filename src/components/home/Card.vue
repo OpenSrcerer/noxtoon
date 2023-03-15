@@ -69,16 +69,16 @@ const src = computed(() => getDynamicImage(props.slug, "cartoons"));
     transition-timing-function: ease;
   }
 
-  .card-container:hover .stat {
-    background-color: var(--nx-c-gray-hover);
-    transition-duration: 0.4s;
-    transition-property: all;
-    transition-timing-function: ease;
-  }
+  /*.card-container:hover .stat {*/
+  /*  background-color: var(--nx-c-gray-hover);*/
+  /*  transition-duration: 0.4s;*/
+  /*  transition-property: all;*/
+  /*  transition-timing-function: ease;*/
+  /*}*/
 
-  .card-container:hover h3 {
-    color: var(--nx-c-smoke)
-  }
+  /*.card-container:hover h3 {*/
+  /*  color: var(--nx-c-smoke)*/
+  /*}*/
 
   .card-container > img {
     max-height: 75%;
@@ -102,7 +102,7 @@ const src = computed(() => getDynamicImage(props.slug, "cartoons"));
     position: relative;
     background-color: var(--nx-c-smoke);
     height: 3em;
-    bottom: 18em;
+    bottom: 16.3em;
     left: 11em;
   }
 
