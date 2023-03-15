@@ -52,7 +52,6 @@ a:hover {
   display: flex;
   flex-direction: column;
   background-color: var(--nx-c-orange);
-  height: 5vh;
   width: 100%;
   justify-content: center;
   z-index: 255;

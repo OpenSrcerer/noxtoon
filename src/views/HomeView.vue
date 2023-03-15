@@ -75,7 +75,6 @@ const shownCartoons = computed(() => {
           t1[sortString.value].toLowerCase().localeCompare(t2[sortString.value].toLowerCase()) :
           parseInt(t2[sortString.value]) - parseInt(t1[sortString.value])
   )
-  console.log(toons)
 
   // Side effect that needs to be after filtering but before pagination
   totalPages.value = Math.ceil(toons.length / ITEMS_PER_PAGE);

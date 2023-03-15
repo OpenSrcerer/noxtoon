@@ -6,7 +6,7 @@
        @click="onClickHandler(type)"
   >
     <slot ref="slot"></slot>
-    <h5 :style="buttonsClicked[type] ? 'color: #FF711C;' : ''">{{ count }}</h5>
+    <h5 :style="buttonsClicked[type] ? 'color: #FF711C;' : ''">{{ formatCompactNumber(count) }}</h5>
   </div>
 </template>
 
@@ -14,6 +14,7 @@
 import {computed, onMounted, reactive, ref} from "vue";
 import type {ButtonClickDto} from "@/components/composables/ButtonClickDto";
 import {increment} from "firebase/firestore";
+import {formatCompactNumber} from "../composables/NumberUtils";
 
 type ButtonType = "heart" | "star";
 
