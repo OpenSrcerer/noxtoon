@@ -4,10 +4,9 @@
     <ParallaxBackground/>
     <ContentBox>
       <ScrollDownTriangle/>
+      <h1 style="margin-bottom: 0; text-decoration-line: underline; font-size: 3em;">Cartoon Search</h1>
       <h2>Find all of your favorite cartoons on Noxtoon, quickly and easily.</h2>
       <hr>
-      <br><br>
-      <h1 style="margin-bottom: 0">Cartoon Search</h1>
 
       <div id="search-sort-container">
         <SortingPicker @sort="onSort" @direction="onDirectionChange"/>

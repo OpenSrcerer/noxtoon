@@ -1,6 +1,6 @@
 <template>
   <div :id="type"
-       :style="buttonsClicked[type] ? 'background-color: #D2CECA;' : ''"
+       :style="buttonsClicked[type] ? 'background-color: #272727;' : ''"
        class="button-w-counter"
        ref="slotContainer"
        @click="onClickHandler(type)"
@@ -40,7 +40,7 @@ const slotContainer = ref<HTMLDivElement | null>(null)
 const animationMutex = ref(false)
 
 /* Computed Vals */
-const fillColor = computed(() => buttonsClicked[props.type] ? "#0F0F0F" : props.color)
+const fillColor = computed(() => buttonsClicked[props.type] ? props.color : "#d2ceca")
 
 /* LIKE / COMMENT HANDLING */
 const onClickHandler = (target: ButtonType) => {
