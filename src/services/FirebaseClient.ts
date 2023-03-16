@@ -4,7 +4,7 @@ import {setFirestore} from "@/services/FirestoreService";
 import {getFirestore} from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyC4EnOb0H_2xTjPfeTxG03yqCyLq86V-kY",
+    apiKey: "AIzaSyBDPOZa0o8MWt8zBY_8OlQtgDbvoedQqSI",
     authDomain: "cs306-fp.firebaseapp.com",
     projectId: "cs306-fp",
     storageBucket: "cs306-fp.appspot.com",
