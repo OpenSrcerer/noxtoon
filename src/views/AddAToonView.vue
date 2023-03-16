@@ -51,5 +51,4 @@ h1:hover {
   background-color: var(--nx-c-gray-hover);
   color: var(--nx-c-near-black);
 }
-
 </style>
