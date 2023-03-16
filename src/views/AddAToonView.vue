@@ -2,7 +2,7 @@
   <div id="add-toon-form">
     <div v-for="input in inputs">
       <h1>{{ input }}</h1>
-      <input v-model="formData[input]" type="text" maxlength="32"/>
+      <input v-model="formData[input]" type="text"/>
     </div>
     <h1 @click="onSubmit">Submit</h1>
   </div>
