@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import {computed, onMounted, reactive, ref} from "vue";
-import type {ButtonClickDto} from "@/components/composables/ButtonClickDto";
+import type {ButtonClickDto} from "@/components/composables/dto/ButtonClickDto";
 import {increment} from "firebase/firestore";
 import {formatCompactNumber} from "../composables/NumberUtils";
 

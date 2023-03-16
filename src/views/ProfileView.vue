@@ -55,8 +55,7 @@ import ButtonWithCounter from "@/components/profile/ButtonWithCounter.vue";
 import YoutubeVideo from "@/components/profile/YoutubeVideo.vue";
 import WavyContentBox from "@/components/containers/WavyContentBox.vue";
 import LoadingSpinner from "@/components/nav/LoadingSpinner.vue";
-import ScrollDownTriangle from "@/components/nav/ScrollDownTriangle.vue";
-import type {ButtonClickDto} from "@/components/composables/ButtonClickDto";
+import type {ButtonClickDto} from "@/components/composables/dto/ButtonClickDto";
 
 interface Cartoon {
   id: string,

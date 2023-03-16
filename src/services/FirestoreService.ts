@@ -3,6 +3,7 @@ import {
     where,
     query,
     getDocs,
+    addDoc,
     updateDoc,
     collection,
     QueryOrderByConstraint,
@@ -10,7 +11,8 @@ import {
     QueryStartAtConstraint
 } from "firebase/firestore";
 import type {Firestore} from "@firebase/firestore"
-import type {ButtonClickDto} from "@/components/composables/ButtonClickDto";
+import type {ButtonClickDto} from "@/components/composables/dto/ButtonClickDto";
+import type {PartialCartoon} from "@/components/composables/dto/CartoonDto";
 
 type Constraint = QueryOrderByConstraint | QueryLimitConstraint | QueryStartAtConstraint;
 
@@ -45,6 +47,18 @@ export const getCartoonBySlug = async (slug: string) => {
     const cartoonsRef = collection(firestore, "cartoons")
     const qwery = query(cartoonsRef, where("slug", "==", slug))
     return getDocs(qwery)
+}
+
+// POST
+
+export const createCartoon = async (cartoon: PartialCartoon) => {
+    const newCartoon = {
+        ...cartoon,
+        slug: cartoon.name?.toLowerCase().replace(" ", "-"),
+        hearts: 0,
+        stars: 0
+    }
+    await addDoc(collection(firestore, "cartoons"), newCartoon)
 }
 
 // PATCH
