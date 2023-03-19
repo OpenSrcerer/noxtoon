@@ -2,12 +2,15 @@
   <div id="triangle-down" @click="scrollToBottom"></div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+
+const props = defineProps<{ scrollToComments?: boolean }>()
+
 const scrollToBottom = () => {
-  window.scrollTo({
-    top: document.body.scrollHeight,
-    behavior: "smooth"
-  });
+  const top = props.scrollToComments ?
+      document.getElementById("comments-title")?.getBoundingClientRect()?.top ?? document.body.scrollHeight + window.scrollY :
+      document.body.scrollHeight
+  window.scrollTo({ top, behavior: "smooth" });
 }
 </script>
 

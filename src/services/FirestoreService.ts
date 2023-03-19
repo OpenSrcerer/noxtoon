@@ -71,7 +71,7 @@ export const addComment = async (commentDto: CommentDto) => {
         firestore,
         `cartoons/${commentDto.cartoonId}/comments`
       ),
-      { username: commentDto.username, comment: commentDto.comment }
+      { username: commentDto.username, comment: commentDto.comment, date: new Date().toISOString() }
     )
 }
 

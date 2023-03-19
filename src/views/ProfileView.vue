@@ -4,8 +4,9 @@
       :tile-color="cartoon.color"
   >
     <YoutubeVideo :src="cartoon.video"/>
-    <h1>{{ cartoon.name }}</h1>
     <WavyContentBox>
+      <h1>{{ cartoon.name }}</h1>
+      <ScrollDownTriangle scroll-to-comments="true"/>
       <div id="profile-content">
         <div id="likes-comments">
           <ButtonWithCounter color="#ED1940"
@@ -36,12 +37,14 @@
           <h2>Age: <span class="claim">{{ cartoon.age ?? "Unknown" }}</span></h2>
           <h2>Gender: <span class="claim">{{ cartoon.gender ?? "Unknown" }}</span></h2>
           <h2>Show: <span class="claim">{{ cartoon.show ?? "Unknown" }}</span></h2>
-          <div v-html="cartoon.description"></div>
+          <div id="description" v-html="cartoon.description"></div>
         </div>
       </div>
 
-      <CommentForm :cartoon-id="cartoon.id"/>
-      <CommentList :cartoon-id="cartoon.id"/>
+      <h2 id="comments-title">Comments</h2>
+      <hr>
+      <AddCommentModal :cartoon-id="cartoon.id" @new-comment="updateTrigger++"/>
+      <CommentList :cartoon-id="cartoon.id" :update-trigger="updateTrigger"/>
       <Footer/>
     </WavyContentBox>
   </GradientContentBox>
@@ -58,9 +61,10 @@ import ButtonWithCounter from "@/components/profile/ButtonWithCounter.vue";
 import YoutubeVideo from "@/components/profile/YoutubeVideo.vue";
 import WavyContentBox from "@/components/containers/WavyContentBox.vue";
 import LoadingSpinner from "@/components/nav/LoadingSpinner.vue";
-import CommentForm from "@/components/profile/CommentForm.vue"
 import type {ButtonClickDto} from "@/components/composables/dto/ButtonClickDto";
 import CommentList from "@/components/profile/CommentList.vue";
+import ScrollDownTriangle from "@/components/nav/ScrollDownTriangle.vue";
+import AddCommentModal from "@/components/profile/AddCommentModal.vue";
 
 interface Cartoon {
   id: string,
@@ -80,6 +84,7 @@ onMounted(async () => await retrieveCartoon())
 
 const props = defineProps<Cartoon>()
 const cartoon = ref<Cartoon | null>(null);
+const updateTrigger = ref(0)
 
 const cartoonImageSrc = computed(() => getDynamicImage(props.slug, "cartoons"));
 const cartoonColorLight = computed(() => cartoon.value?.color.slice(0, -2) + '99')
@@ -132,6 +137,15 @@ const retrieveCartoon = async () => {
   margin-top: 1em;
 }
 
+#description {
+  font-size: 1.25em;
+}
+
+#comments-title {
+  margin-top: 3em;
+  font-size: 3em;
+}
+
 .claim {
   font-weight: normal;
 }
@@ -151,6 +165,12 @@ h1 {
 
 h2 {
   margin: 0;
+  font-size: 2em;
+}
+
+hr {
+  width: var(--content-box-width);
+  border: 1px solid var(--nx-c-orange);
 }
 
 #wavy-content {
