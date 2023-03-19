@@ -6,7 +6,7 @@
     <YoutubeVideo :src="cartoon.video"/>
     <WavyContentBox>
       <h1>{{ cartoon.name }}</h1>
-      <ScrollDownTriangle scroll-to-comments="true"/>
+      <ScrollDownTriangle :scroll-to-comments="true"/>
       <div id="profile-content">
         <div id="likes-comments">
           <ButtonWithCounter color="#ED1940"
