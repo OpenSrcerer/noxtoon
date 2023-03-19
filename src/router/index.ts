@@ -12,11 +12,6 @@ const routes = [
         component: HomeView
     },
     {
-        path: '/add-a-toon',
-        name: 'Add A Cartoon',
-        component: AddAToonView,
-    },
-    {
         path: '/about',
         name: 'About',
         component: AboutView,

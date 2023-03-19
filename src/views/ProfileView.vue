@@ -39,6 +39,9 @@
           <div v-html="cartoon.description"></div>
         </div>
       </div>
+
+      <CommentForm :cartoon-id="cartoon.id"/>
+      <CommentList :cartoon-id="cartoon.id"/>
       <Footer/>
     </WavyContentBox>
   </GradientContentBox>
@@ -55,7 +58,9 @@ import ButtonWithCounter from "@/components/profile/ButtonWithCounter.vue";
 import YoutubeVideo from "@/components/profile/YoutubeVideo.vue";
 import WavyContentBox from "@/components/containers/WavyContentBox.vue";
 import LoadingSpinner from "@/components/nav/LoadingSpinner.vue";
+import CommentForm from "@/components/profile/CommentForm.vue"
 import type {ButtonClickDto} from "@/components/composables/dto/ButtonClickDto";
+import CommentList from "@/components/profile/CommentList.vue";
 
 interface Cartoon {
   id: string,

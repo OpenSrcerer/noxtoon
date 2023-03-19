@@ -2,6 +2,7 @@ import {
     doc,
     where,
     query,
+    getDoc,
     getDocs,
     addDoc,
     updateDoc,
@@ -13,6 +14,7 @@ import {
 import type {Firestore} from "@firebase/firestore"
 import type {ButtonClickDto} from "@/components/composables/dto/ButtonClickDto";
 import type {PartialCartoon} from "@/components/composables/dto/CartoonDto";
+import type {CommentDto} from "@/components/composables/dto/CommentDto";
 
 type Constraint = QueryOrderByConstraint | QueryLimitConstraint | QueryStartAtConstraint;
 
@@ -45,8 +47,11 @@ export const getCartoons = async () => {
 
 export const getCartoonBySlug = async (slug: string) => {
     const cartoonsRef = collection(firestore, "cartoons")
-    const qwery = query(cartoonsRef, where("slug", "==", slug))
-    return getDocs(qwery)
+    return getDocs(query(cartoonsRef, where("slug", "==", slug)))
+}
+
+export const getCartoonComments = async (cartoonId: string) => {
+    return getDocs(collection(firestore, `cartoons/${cartoonId}/comments`))
 }
 
 // POST
@@ -59,6 +64,15 @@ export const createCartoon = async (cartoon: PartialCartoon) => {
         stars: 0
     }
     await addDoc(collection(firestore, "cartoons"), newCartoon)
+}
+
+export const addComment = async (commentDto: CommentDto) => {
+    await addDoc(collection(
+        firestore,
+        `cartoons/${commentDto.cartoonId}/comments`
+      ),
+      { username: commentDto.username, comment: commentDto.comment }
+    )
 }
 
 // PATCH

@@ -7,7 +7,6 @@
 
       <div id="nav-header-container-right">
         <RouterLink to="/about">ABOUT</RouterLink>
-        <RouterLink to="/add-a-toon">ADD A TOON</RouterLink>
       </div>
     </div>
   </div>

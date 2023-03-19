@@ -1,8 +1,9 @@
 <template>
-  <img id="henry" src="@/assets/img/henry.png">
+  <img id="henry" src="@/assets/img/misc/henry.png">
   <img src="@/assets/img/parallax/layer5.png">
   <h1>404</h1>
   <h2>This isn't the page you're looking 4!</h2>
+  <Footer/>
 </template>
 
 <style scoped>
@@ -43,3 +44,6 @@ h2 {
   font-size: 5em;
 }
 </style>
+<script setup lang="ts">
+import Footer from "@/components/nav/Footer.vue";
+</script>

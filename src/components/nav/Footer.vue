@@ -6,6 +6,13 @@
 </template>
 
 <style scoped>
+#footer-container {
+  position: absolute;
+  bottom: -7.5em;
+  left: 10%;
+  right: 10%;
+}
+
 hr {
   width: var(--content-box-width);
   border: 1px solid var(--nx-c-orange);

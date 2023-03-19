@@ -1,5 +1,5 @@
 <template>
-  <img id="loading-spinner" src="@/assets/img/cat-dog.png">
+  <img id="loading-spinner" src="@/assets/img/misc/cat-dog.png">
   <h1 id="loading-text">Loading...</h1>
 </template>
 
