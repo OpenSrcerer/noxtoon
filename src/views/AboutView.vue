@@ -60,6 +60,7 @@ export default defineComponent({
   flex-direction: column;
   align-items: center;
   width: var(--content-box-width);
+  transition: all 500ms ease-in-out;
 }
 
 hr {

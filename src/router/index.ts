@@ -2,13 +2,17 @@ import {createRouter, createWebHistory} from "vue-router";
 import FourOhFourView from "@/views/FourOhFourView.vue";
 import HomeView from "@/views/HomeView.vue";
 import ProfileView from "@/views/ProfileView.vue";
-import AddAToonView from "@/views/AddAToonView.vue";
 import AboutView from "@/views/AboutView.vue";
 
 const routes = [
     {
         path: '/',
         name: 'Home',
+        component: HomeView
+    },
+    {
+        path: '/search',
+        name: 'Search',
         component: HomeView
     },
     {
@@ -33,6 +37,12 @@ const router = createRouter({
     history: createWebHistory(),
     routes,
     scrollBehavior(to, from, savedPosition) {
+        if (to.name === "Search") {
+            const top = document.getElementById("triangle-down")?.getBoundingClientRect()?.top ??
+              document.body.scrollHeight + window.scrollY
+            setTimeout(() => window.scrollTo({ top, behavior: "smooth" }), 250)
+            return;
+        }
         if (to.name === from.name) {
             return { top: 0, behavior: "smooth" }
         }

@@ -7,6 +7,7 @@
 
       <div id="nav-header-container-right">
         <RouterLink to="/about">ABOUT</RouterLink>
+        <RouterLink to="/search">SEARCH TOONS</RouterLink>
       </div>
     </div>
   </div>
@@ -88,5 +89,6 @@ a:hover {
 
 #nav-header-container-right > :last-child {
   margin-right: 2em;
+  width: 7em;
 }
 </style>
