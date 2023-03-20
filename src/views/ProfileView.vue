@@ -161,6 +161,7 @@ h1 {
   -webkit-text-stroke-color: var(--nx-c-near-black);
   user-select: none;
   text-align: center;
+  font-weight: 100;
 }
 
 h2 {
