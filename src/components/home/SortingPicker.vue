@@ -100,6 +100,7 @@ const onDirectionChange = () => {
   user-select: none;
   text-align: left;
   cursor: pointer;
+  background-color: transparent;
   transition: all .2s ease-in-out;
 }
 
