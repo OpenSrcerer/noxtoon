@@ -28,7 +28,6 @@ import {computed, onMounted, ref, watch} from "vue";
 interface PaginationControlsProps {
   currentPage: number;
   totalPages: number;
-  animationMutex: boolean;
 }
 
 const props = defineProps<PaginationControlsProps>();
@@ -78,7 +77,7 @@ const onPageChangeEvent = () => {
 }
 
 const onPrevious = () => {
-  if (props.currentPage === 1 || props.animationMutex) return;
+  if (props.currentPage === 1) return;
   if (props.currentPage <= props.totalPages && props.currentPage > 4) {
     customPage.value = props.currentPage - 1
   }
@@ -86,7 +85,7 @@ const onPrevious = () => {
 }
 
 const onNext = () => {
-  if (props.currentPage === props.totalPages || props.animationMutex) return;
+  if (props.currentPage === props.totalPages) return;
   if (props.currentPage >= 3 && props.currentPage <= props.totalPages) {
     customPage.value = props.currentPage + 1
   }

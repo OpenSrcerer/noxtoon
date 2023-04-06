@@ -14,25 +14,26 @@
       </div>
 
       <div id="outer-content-box">
-        <div ref="refPage" id="inner-content-box">
-          <Card v-if="shownCartoons.length !== 0"
-                v-for="cartoon in shownCartoons"
-                :slug="cartoon.slug"
-                :name="cartoon.name"
-                :hearts="cartoon.hearts"
-                :stars="cartoon.stars"
-          />
-          <div v-else id="no-results-placeholder">
-            <h1>No results for "{{ searchString }}"</h1>
-            <p>Try refining your search query.</p>
+        <Transition :name="`swipe${pageChangeDirection}`">
+          <div id="inner-content-box" :key="currentPage">
+            <Card v-if="shownCartoons.length !== 0"
+                  v-for="cartoon in shownCartoons"
+                  :slug="cartoon.slug"
+                  :name="cartoon.name"
+                  :hearts="cartoon.hearts"
+                  :stars="cartoon.stars"
+            />
+            <div v-else id="no-results-placeholder">
+              <h1>No results for "{{ searchString }}"</h1>
+              <p>Try refining your search query.</p>
+            </div>
           </div>
-        </div>
+        </Transition>
       </div>
 
       <PaginationControls
           :total-pages="totalPages"
           :current-page="currentPage"
-          :animation-mutex="animationMutex"
           @next="loadPage(currentPage + 1)"
           @prev="loadPage(currentPage - 1)"
           @page="loadPage"
@@ -68,8 +69,8 @@ const sortString = ref<string>("name");
 const sortReverse = ref<boolean>(false);
 const currentPage = ref(1);
 const totalPages = ref(0);
-const refPage = ref<HTMLDivElement>();
-const animationMutex = ref(false)
+
+const pageChangeDirection = ref("Right");
 
 /* ---- Computed ---- */
 const shownCartoons = computed(() => {
@@ -100,21 +101,13 @@ onMounted(async () => updateCartoonList())
 
 /* ----- Methods ---- */
 const loadPage = async (page: number) => {
-  // Mutex Guard & Page limit guard
-  const animationAlreadyPlaying = animationMutex.value;
   const pageOutOfBounds = page === 0 || page > totalPages.value;
   const alreadyOnPage = currentPage.value === page;
 
-  if (animationAlreadyPlaying || pageOutOfBounds || alreadyOnPage) { return }
-  animationMutex.value = true; // Grab the mutex
+  if (pageOutOfBounds || alreadyOnPage) { return }
 
-  const swipeClass = page > currentPage.value ? "swipeLeft" : "swipeRight";
+  pageChangeDirection.value = page > currentPage.value ? "Left" : "Right";
 
-  refPage.value?.classList.add(swipeClass)
-  setTimeout(() => {
-    refPage.value?.classList.remove(swipeClass);
-    animationMutex.value = false; // Release the mutex
-  }, ANIMATION_LENGTH)
   currentPage.value = page
 }
 
@@ -185,12 +178,16 @@ hr {
 
 /* Page Animation */
 
-.swipeLeft {
+.swipeLeft-enter-from, .swipeLeft-enter-active, .swipeLeft-enter-to {
   animation: swipePageLeft v-bind(ANIMATION_LENGTH + "ms") !important;
 }
 
-.swipeRight {
+.swipeRight-enter-from, .swipeRight-enter-active, .swipeRight-enter-to {
   animation: swipePageRight v-bind(ANIMATION_LENGTH + "ms") !important;
+}
+
+.swipeLeft-leave-from, .swipeLeft-leave-active, .swipeLeft-leave-to, .swipeRight-leave-from, .swipeRight-leave-active, .swipeRight-leave-to {
+  display: none;
 }
 
 @keyframes fadeSwipeIn {
