@@ -6,15 +6,16 @@ networks:
 
 volumes:
   noxtoon-db-data:
+  noxtoon-vue-frontend-nginx:
 
 services:
   noxtoon-vue-frontend:
     container_name: noxtoon-vue-frontend
-    build: ./frontend/
+    build: frontend/
     restart: "no"
     hostname: noxtoon-vue-frontend
     volumes:
-      - ./frontend/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./frontend/nginx.conf:/etc/nginx/nginx.conf
     networks:
       - noxtoon-net
     ports:
@@ -22,7 +23,7 @@ services:
 
   noxtoon-php-apache:
     container_name: noxtoon-php-apache
-    build: ./backend/
+    build: backend/
     restart: "no"
     hostname: noxtoon-php-apache
     volumes:
