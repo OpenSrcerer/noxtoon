@@ -6,21 +6,20 @@
        @click="onClickHandler(type)"
   >
     <slot ref="slot"></slot>
-    <h5 :style="buttonsClicked[type] ? 'color: #FF711C;' : ''">{{ formatCompactNumber(parseInt(count)) }}</h5>
+    <h5 :style="buttonsClicked[type] ? 'color: #FF711C;' : ''">{{ formatCompactNumber(count) }}</h5>
   </div>
 </template>
 
 <script setup lang="ts">
 import {computed, onMounted, reactive, ref} from "vue";
 import type {ButtonClickDto} from "@/components/composables/dto/ButtonClickDto";
-import {increment} from "firebase/firestore";
 import {formatCompactNumber} from "../composables/NumberUtils";
 
 type ButtonType = "heart" | "star";
 
 interface ButtonWithCounterProps {
   cartoonId: string;
-  count: string;
+  count: number;
   color: string;
   type: ButtonType;
 }
@@ -48,7 +47,7 @@ const onClickHandler = (target: ButtonType) => {
 
   // Event value: 1 (add like) / -1 (remove like)
   const value = buttonsClicked[target] ? -1 : 1;
-  const property = props.type === "heart" ? { hearts: increment(value) } : { stars: increment(value) };
+  const property = props.type === "heart" ? { hearts: value } : { likes: value };
   emit('buttonClick', <ButtonClickDto> { cartoonId: props.cartoonId, property })
   saveLocalClickStatus(target, !buttonsClicked[target])
 

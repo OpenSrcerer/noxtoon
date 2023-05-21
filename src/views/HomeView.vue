@@ -47,7 +47,7 @@
 import ParallaxBackground from "@/components/home/ParallaxBackground.vue";
 import Footer from "@/components/nav/Footer.vue";
 import {computed, onMounted, ref} from "vue";
-import {getCartoons} from "@/services/FirestoreService";
+import {getCartoons} from "@/services/BackendClient";
 import Card from "@/components/home/Card.vue";
 import ContentBox from "@/components/containers/WavyContentBox.vue";
 import GradientContentBox from "@/components/containers/GradientTileContentBox.vue";
@@ -119,8 +119,7 @@ const loadPage = async (page: number) => {
 }
 
 const updateCartoonList = async () => {
-  const allCartoons = await getCartoons()
-  cartoons.value = allCartoons.docs.map(doc => ({...doc.data(), id: doc.id}));
+  cartoons.value = await getCartoons();
 }
 
 const onSearch = (search: string) => {

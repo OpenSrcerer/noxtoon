@@ -20,7 +20,7 @@
 <script setup lang="ts">
 // ------ Comment Handling ------
 import {reactive, ref} from "vue";
-import {addComment} from "@/services/FirestoreService";
+import {addComment} from "@/services/BackendClient";
 
 interface CommentFormProps {
   cartoonId: string;

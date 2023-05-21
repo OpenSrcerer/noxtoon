@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import {computed, onMounted, ref, watch} from "vue";
 import type {CommentDto} from "@/components/composables/dto/CommentDto";
-import {getCartoonComments} from "@/services/FirestoreService";
+import {getCartoonComments} from "@/services/BackendClient";
 import PaginationControls from "@/components/home/PaginationControls.vue";
 
 /* ---- Constants ---- */
@@ -65,9 +65,8 @@ const totalPages = computed(() => Math.ceil(comments.value.length / ITEMS_PER_PA
 
 const retrieveCartoonComments = async () => {
   const allComments = await getCartoonComments(props.cartoonId)
-  comments.value = allComments.docs.map(doc => <CommentDto>({...doc.data(), id: doc.id}))
-      .map(data => { data.date = new Date(<string> data.date); return data; })
-      .sort((a, b) => (<Date> b.date).getTime() - (<Date> a.date).getTime());
+  comments.value = allComments
+      .map(data => { data.date = new Date(<string> data.date); return data; });
 }
 
 const loadPage = async (page: number) => {

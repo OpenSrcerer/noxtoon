@@ -8,8 +8,8 @@ export interface CartoonDto {
     description: string,
     color: string;
     video: string;
-    hearts: string;
-    stars: string;
+    hearts: number;
+    stars: number;
 }
 
 export type PartialCartoon = Partial<CartoonDto>

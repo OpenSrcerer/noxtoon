@@ -54,7 +54,7 @@
 <script setup lang="ts">
 import Footer from "@/components/nav/Footer.vue";
 import {computed, onMounted, ref} from "vue";
-import {getCartoonBySlug, updateCartoonStats} from "@/services/FirestoreService";
+import {getCartoonBySlug, updateCartoonStats} from "@/services/BackendClient";
 import GradientContentBox from "@/components/containers/GradientTileContentBox.vue";
 import {getDynamicImage} from "@/components/composables/URLUtils";
 import ButtonWithCounter from "@/components/profile/ButtonWithCounter.vue";
@@ -76,8 +76,8 @@ interface Cartoon {
   description: string,
   color: string;
   video: string;
-  hearts: string;
-  stars: string;
+  hearts: number;
+  stars: number;
 }
 
 onMounted(async () => await retrieveCartoon())
@@ -95,9 +95,7 @@ const onClick = async (e: ButtonClickDto) => {
 }
 
 const retrieveCartoon = async () => {
-  cartoon.value = (await getCartoonBySlug(props.slug))
-      .docs
-      .map(doc => (<Cartoon> { ...doc.data(), id: doc.id }))[0];
+  cartoon.value = (await getCartoonBySlug(props.slug));
 }
 </script>
 

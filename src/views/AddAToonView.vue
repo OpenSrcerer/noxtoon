@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import {reactive} from "vue";
-import {createCartoon} from "@/services/FirestoreService";
+import {createCartoon} from "@/services/BackendClient";
 
 const formData = reactive<Record<string, any>>({});
 const inputs = ['Name', 'Show', 'Gender', 'Age', 'Description', 'Video', 'Color']
