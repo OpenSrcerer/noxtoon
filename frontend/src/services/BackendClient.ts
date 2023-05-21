@@ -7,7 +7,7 @@ const postHeaderConfig = {
 };
 
 export const getCartoons = async () => {
-    return (await axios.get("http://cs325project.dvl.to/controllers/cartoons/get_cartoons.php")).data;
+    return (await axios.get("http://localhost:1718/controllers/cartoons/get_cartoons.php")).data;
 }
 
 export const getCartoonBySlug = async (slug: string) => {
@@ -15,7 +15,7 @@ export const getCartoonBySlug = async (slug: string) => {
     bodyFormData.append("slug", slug);
 
     const res = await axios.post(
-      "http://cs325project.dvl.to/controllers/cartoons/get_cartoon_by_slug.php",
+      "http://localhost:1718/controllers/cartoons/get_cartoon_by_slug.php",
       bodyFormData,
       postHeaderConfig
     )
@@ -28,7 +28,7 @@ export const getCartoonComments = async (cartoonId: string) => {
     bodyFormData.append("cartoonId", cartoonId);
 
     const res = await axios.post(
-      "http://cs325project.dvl.to/controllers/comments/get_cartoon_comments.php",
+      "http://localhost:1718/controllers/comments/get_cartoon_comments.php",
       bodyFormData,
       postHeaderConfig
     )
@@ -44,7 +44,7 @@ export const addComment = async (commentDto: CommentDto) => {
     bodyFormData.append("date", new Date().toISOString())
 
     const res = await axios.post(
-      "http://cs325project.dvl.to/controllers/comments/post_comment.php",
+      "http://localhost:1718/controllers/comments/post_comment.php",
       bodyFormData,
       postHeaderConfig
     )
@@ -63,7 +63,7 @@ export const updateCartoonStats = async (dto: ButtonClickDto) => {
     bodyFormData.append("cartoonId", dto.cartoonId);
 
     await axios.post(
-      "http://cs325project.dvl.to/controllers/cartoons/patch_cartoon_stats.php",
+      "http://localhost:1718/controllers/cartoons/patch_cartoon_stats.php",
       bodyFormData,
       postHeaderConfig
     )
