@@ -2,10 +2,10 @@
 
 use PgSql\Connection;
 
-$host        = "host = 127.0.0.1";
+$host        = "host = noxtoon-db";
 $port        = "port = 5432";
-$dbname      = "dbname = postgres";
-$credentials = "user = postgres";
+$dbname      = "dbname = noxtoon";
+$credentials = "user = bonkers password=bobcat";
 
 function exec_sql($sql): array
 {
