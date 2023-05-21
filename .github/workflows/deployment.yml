@@ -1,0 +1,31 @@
+on:
+  push:
+    branches:
+      - php-backend
+
+name: noxtoon-deployment
+
+jobs:
+  deploy-on-okteto:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+
+      - name: context
+        uses: okteto/context@latest
+        with:
+          token: ${{ secrets.OKTETO_TOKEN }}
+
+      - name: "Activate Namespace"
+        uses: okteto/namespace@latest
+        with:
+          namespace: opensrcerer
+
+      - name: "Trigger the pipeline"
+        uses: okteto/pipeline@latest
+        with:
+          name: noxtoon-deployment
+          timeout: 8m
+          skipIfExists: false
+          filename: docker-compose.yml
