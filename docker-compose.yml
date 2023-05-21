@@ -1,0 +1,45 @@
+version: "3.8"
+
+networks:
+  noxtoon-net:
+    driver: bridge
+
+volumes:
+  noxtoon-db-data:
+
+services:
+  noxtoon-vue-frontend:
+    container_name: noxtoon-vue-frontend
+    build: ./frontend/
+    restart: "no"
+    hostname: noxtoon-vue-frontend
+    volumes:
+      - ./frontend/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - noxtoon-net
+    ports:
+      - "1717:80"
+
+  noxtoon-php-apache:
+    container_name: noxtoon-php-apache
+    build: ./backend/
+    restart: "no"
+    hostname: noxtoon-php-apache
+    volumes:
+      - ./backend/src/:/var/www/html/
+    networks:
+      - noxtoon-net
+    ports:
+      - "1718:80"
+
+  noxtoon-db:
+    container_name: noxtoon-db
+    image: postgres:15.2-bullseye
+    restart: "no"
+    hostname: noxtoon-db
+    networks:
+      - noxtoon-net
+    expose:
+      - 5432
+    env_file:
+      - .env
