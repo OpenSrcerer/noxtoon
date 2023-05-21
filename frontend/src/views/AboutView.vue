@@ -1,7 +1,7 @@
 <template>
   <div id="about">
     <h1>Welcome to</h1>
-    <img id="logo" src="@/assets/img/parallax/logo-wide.png">
+    <img id="logo" src="../assets/img/parallax/logo-wide.png">
     <hr>
 
     <div class="para-image">
@@ -10,11 +10,11 @@
         cartoons that you can easily browse and explore. Our user-friendly interface allows you to find your favorite
         cartoons <u>quickly and easily</u>, and get information on them including summaries, ratings, and reviews.
       </p>
-      <img src="@/assets/img/misc/bonkers1.png"/>
+      <img src="../assets/img/misc/bonkers1.png"/>
     </div>
 
     <div class="para-image">
-      <img src="@/assets/img/misc/bonkers2.png"/>
+      <img src="../assets/img/misc/bonkers2.png"/>
       <p>
         Whether you're looking to revisit <i>classic cartoons</i> from your childhood or discover <i>the latest</i> trends in
         the world of animation, <b>Noxtoon</b> has got you covered. Our database is constantly updated with new and exciting
@@ -27,7 +27,7 @@
         <u>So, what are you waiting for?</u> Start browsing our collection of cartoons, create your own watchlist, and join
         the Noxtoon community today!
       </p>
-      <img src="@/assets/img/misc/bonkers3.png"/>
+      <img src="../assets/img/misc/bonkers3.png"/>
     </div>
 
     <Footer/>

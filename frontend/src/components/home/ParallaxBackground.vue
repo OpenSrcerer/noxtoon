@@ -1,37 +1,37 @@
 <template>
   <div id="parallax-container" class="parallax" ref="container">
 
-    <img src="@/assets/img/parallax/logo-wide.png"
+    <img src="../../assets/img/parallax/logo-wide.png"
          data-rellax-speed="-4"
          id="logo-wide"
     />
 
-    <img src="@/assets/img/parallax/layer0.png"
+    <img src="../../assets/img/parallax/layer0.png"
          data-rellax-speed="-2"
          id="layer-0"
     />
 
-    <img src="@/assets/img/parallax/layer1.png"
+    <img src="../../assets/img/parallax/layer1.png"
          data-rellax-speed="-1"
          id="layer-1"
     />
 
-    <img src="@/assets/img/parallax/layer2.png"
+    <img src="../../assets/img/parallax/layer2.png"
          data-rellax-speed="1"
          id="layer-2"
     />
 
-    <img src="@/assets/img/parallax/layer3.png"
+    <img src="../../assets/img/parallax/layer3.png"
          data-rellax-speed="2"
          id="layer-3"
     />
 
-    <img src="@/assets/img/parallax/layer4.png"
+    <img src="../../assets/img/parallax/layer4.png"
          data-rellax-speed="3"
          id="layer-4"
     />
 
-    <img src="@/assets/img/parallax/layer5.png"
+    <img src="../../assets/img/parallax/layer5.png"
          data-rellax-speed="4"
          id="layer-5"
     />
