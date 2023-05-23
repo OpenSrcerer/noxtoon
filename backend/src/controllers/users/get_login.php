@@ -2,7 +2,10 @@
 
 namespace models;
 
+global $cookie_secret;
+
 include "../../common/response_headers.php";
+include "../../security/constants.php";
 include "../../repositories/user_repository.php";
 
 if (
@@ -21,4 +24,10 @@ if (!is_login_match(
     exit;
 }
 
-http_response_code(202);
+http_response_code(200);
+setcookie( // Cookie that expires in 1 hour
+    "noxtoon-session",
+    password_hash($cookie_secret, PASSWORD_BCRYPT),
+    time() + 60 * 60,
+    "/"
+);
