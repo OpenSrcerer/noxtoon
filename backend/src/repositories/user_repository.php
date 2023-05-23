@@ -9,7 +9,8 @@ include "../../utils/uuid_generator.php";
 function create_user(
     string $username,
     string $password,
-): bool {
+): bool
+{
     if (is_username_taken($username)) {
         return false;
     }
@@ -25,6 +26,19 @@ function create_user(
     pg_close($db);
 
     return true;
+}
+
+// returns a session token JWT
+function authenticate(
+    string $username,
+    string $password
+): string|false {
+    if (!is_login_match($username, $password)) {
+        http_response_code(403);
+        exit;
+    }
+
+    return "";
 }
 
 //function get_users(): array
@@ -43,9 +57,32 @@ function create_user(
 //    return $users;
 //}
 
+function is_login_match(
+    string $username,
+    string $password
+): bool
+{
+    if (!is_username_taken($username)) {
+        http_response_code(404);
+        exit;
+    }
+
+    $sql =<<<EOF
+        SELECT password_hash FROM users WHERE username = '$username'
+    EOF;
+
+    [$db, $res] = exec_sql($sql);
+    $password_hash = pg_fetch_row($res)[0];
+
+    pg_close($db);
+
+    return password_verify($password, $password_hash);
+}
+
 function is_username_taken(
     string $username
-): bool {
+): bool
+{
     $sql =<<<EOF
         SELECT COUNT(*) FROM users WHERE username = '$username'
     EOF;
@@ -55,8 +92,5 @@ function is_username_taken(
 
     pg_close($db);
 
-    if ($number_of_users_with_username > 0) {
-        return true;
-    }
-    return false;
+    return $number_of_users_with_username > 0;
 }
