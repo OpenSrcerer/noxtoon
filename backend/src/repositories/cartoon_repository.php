@@ -1,8 +1,8 @@
 <?php
 
-namespace dto;
+namespace models;
 
-include "../../dto/Cartoon.php";
+include "../../models/Cartoon.php";
 include "../../db/db_utils.php";
 
 function get_cartoons(): array

@@ -1,6 +1,6 @@
 <?php
 
-namespace dto;
+namespace models;
 
 include "../../common/response_headers.php";
 include "../../repositories/cartoon_repository.php";

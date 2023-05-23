@@ -1,8 +1,8 @@
 <?php
 
-namespace dto;
+namespace models;
 
-include "../../dto/Comment.php";
+include "../../models/Comment.php";
 include "../../db/db_utils.php";
 
 function get_comments_by_cartoon_id(string $cartoon_id): array

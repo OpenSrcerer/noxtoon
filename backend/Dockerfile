@@ -1,3 +1,5 @@
+# Custom Dockerfile to build PHP with Postgres drivers
+
 FROM php:8.1.19-apache-bullseye
 
 RUN apt-get update
