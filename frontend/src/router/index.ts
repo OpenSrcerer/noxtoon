@@ -49,6 +49,13 @@ const router = createRouter({
         return { top: 0, behavior: "auto" };
     }
 })
+
+router.beforeEach((to, from) => {
+    if (!document.cookie["noxtoon-session"] && to.path != "/login") {
+        router.push({ path: "/login"})
+    }
+})
+
 router.afterEach((to, from) => {
     document.title = (to.name) ? `Noxtoon -  ${String(to.name)}` : "Noxtoon";
 });
