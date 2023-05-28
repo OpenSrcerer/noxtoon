@@ -27,7 +27,10 @@ if (!is_login_match(
 http_response_code(200);
 setcookie( // Cookie that expires in 1 hour
     "noxtoon-session",
-    password_hash($cookie_secret, PASSWORD_BCRYPT),
+    json_encode(array(
+        "session" => password_hash($cookie_secret, PASSWORD_BCRYPT),
+        "expiry" => time() + 60 * 60
+    )),
     time() + 60 * 60,
     "/"
 );

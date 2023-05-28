@@ -48,7 +48,7 @@ create index comments_date_index
     on comments (post_date);
 
 
-INSERT INTO public.users (id, username, password_hash) VALUES ('1', 'bonky', 'unset');
+INSERT INTO public.users (id, username, password_hash) VALUES ('1', 'bonky', '$2y$10$0odEynNxGxhQO3poqkVTqO5MRaB6Viha/JYDJRISO393dfd9pZDA.');
 
 INSERT INTO public.cartoons (id, name, age, gender, description, color, show, slug, hearts, stars, video) VALUES ('9NR0UwzU49GjePct3PnI', 'Danny Phantom', '14', 'Male', '<b>Danny Phantom</b> is a 14-year-old boy who gains ghost powers after an accident in his parents'' ghost-hunting laboratory. He uses his powers to fight against ghosts and other supernatural threats while trying to keep his ghost identity a secret from his friends and family.', '#52525233', 'Danny Phantom', 'danny-phantom', 1079, 213, '2djx83-4XNQ');
 INSERT INTO public.cartoons (id, name, age, gender, description, color, show, slug, hearts, stars, video) VALUES ('KrTxoA6DzRwwDFRNy1lj', 'Wile E. Coyote', null, 'Male', 'Wile E. Coyote is a cartoon character known for his elaborate and often comically disastrous attempts to catch his arch-nemesis, the Road Runner. Despite his superior intellect and seemingly endless supply of Acme products, he always ends up foiled by the Road Runner''s speed and ingenuity. His schemes are often highly creative and involve complex Rube Goldberg machines or other contraptions, but they almost always end in disaster. Despite this, Wile E. Coyote is persistent in his pursuit of the Road Runner and never gives up hope of one day catching him.', '#BEBEBE33', 'Looney Tunes', 'wile-e-coyote', 3600, 1102, 'xqHk8cH2dnk');
