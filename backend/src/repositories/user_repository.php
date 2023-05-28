@@ -94,3 +94,18 @@ function is_username_taken(
 
     return $number_of_users_with_username > 0;
 }
+
+function get_user_by_username(
+    string $username
+): User {
+    $sql =<<<EOF
+        SELECT * FROM users WHERE username = '$username'
+    EOF;
+
+    [$db, $res] = exec_sql($sql);
+    $user = User::from_row(pg_fetch_row($res));
+
+    pg_close($db);
+
+    return $user;
+}

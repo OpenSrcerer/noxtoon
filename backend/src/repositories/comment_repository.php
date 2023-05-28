@@ -3,7 +3,7 @@
 namespace models;
 
 include "../../models/Comment.php";
-include "../../db/db_utils.php";
+include "../../repositories/user_repository.php";
 
 function get_comments_by_cartoon_id(string $cartoon_id): array
 {
@@ -28,13 +28,14 @@ function get_comments_by_cartoon_id(string $cartoon_id): array
 
 function create_comment(
     string $content,
-    string $date,
     string $cartoon_id,
-    string $user_id
+    string $username
 ): void {
+    $userId = get_user_by_username($username)->getId();
+
     $sql =<<<EOF
         INSERT INTO comments (user_id, content, post_date, cartoon_id)
-        VALUES ('$user_id', '$content', '$date', '$cartoon_id')
+        VALUES ($userId, '$content', CURRENT_TIMESTAMP, '$cartoon_id')
     EOF;
 
     [$db,] = exec_sql($sql);

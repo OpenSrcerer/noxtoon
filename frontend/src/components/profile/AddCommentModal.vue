@@ -2,9 +2,6 @@
   <h1 v-if="modalActive" id="close-modal" @click="modalActive = !modalActive">x</h1>
 
   <div v-if="modalActive" id="comment-form">
-    <h1>Nickname</h1>
-    <input v-model="formData.nickname" type="text" maxlength="30"/>
-
     <h1>Comment</h1>
     <textarea v-model="formData.comment" maxlength="750"/>
     <h1 @click="onSubmit">Submit</h1>
@@ -34,14 +31,13 @@ const modalActive = ref(false);
 clearForm()
 
 const onSubmit = async () => {
-  if ((formData.nickname ?? '').length < 3 || (formData.comment ?? '').length < 10) {
-    alert("Please make sure that your nickname is at least 3 characters and your comment is 10 characters long!")
+  if ((formData.comment ?? '').length < 10) {
+    alert("Please make sure that your comment is 10 characters long!")
     return;
   }
 
   await addComment({
     cartoonId: props.cartoonId,
-    username: formData.nickname,
     comment: formData.comment
   })
   emit('newComment')

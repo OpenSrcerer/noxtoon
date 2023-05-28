@@ -34,4 +34,9 @@ class User implements JsonSerializable
             'passwordHash' => $this->password_hash
         ];
     }
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
 }
