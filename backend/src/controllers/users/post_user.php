@@ -2,9 +2,11 @@
 
 namespace models;
 
+global $cookie_secret;
+
 include "../../common/response_headers.php";
 include "../../repositories/user_repository.php";
-include "../../security/verify_session.php"; # Authentication Guard
+include "../../security/constants.php";
 
 if (
     !isset($_POST['username']) ||
@@ -25,4 +27,13 @@ if (!$create_user_success) {
 }
 
 http_response_code(201);
-// echo json_encode(get_users());
+setcookie( // Cookie that expires in 1 hour
+    "noxtoon-session",
+    json_encode(array(
+        "username" => $_POST['username'],
+        "session" => password_hash($cookie_secret, PASSWORD_BCRYPT),
+        "expiry" => time() + 60 * 60
+    )),
+    time() + 60 * 60,
+    "/"
+);

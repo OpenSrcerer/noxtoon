@@ -3,6 +3,8 @@ import FourOhFourView from "@/views/FourOhFourView.vue";
 import HomeView from "@/views/HomeView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import AboutView from "@/views/AboutView.vue";
+import SignInUpView from "@/views/SignInUpView.vue";
+import {getCookie} from "../components/composables/GetCookie";
 
 const routes = [
     {
@@ -19,6 +21,11 @@ const routes = [
         path: '/about',
         name: 'About',
         component: AboutView,
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: SignInUpView,
     },
     {
         path: '/toon/:slug',
@@ -51,7 +58,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
-    if (!document.cookie["noxtoon-session"] && to.path != "/login") {
+    if (!getCookie("noxtoon-session") && to.path != "/login") {
         router.push({ path: "/login"})
     }
 })
