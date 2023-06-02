@@ -2,7 +2,6 @@ import type {ButtonClickDto} from "@/components/composables/dto/ButtonClickDto";
 import type {CommentDto} from "@/components/composables/dto/CommentDto";
 import axios from "axios";
 import router from "../router";
-import {getCookie} from "../components/composables/GetCookie";
 
 const postHeaderConfig = {
     headers: { "Content-Type": "multipart/form-data" },
@@ -44,8 +43,6 @@ export const getCartoonComments = async (cartoonId: string) => {
 }
 
 export const addComment = async (commentDto: CommentDto) => {
-    const currentUser = JSON.parse(decodeURIComponent(getCookie("noxtoon-session"))).username;
-
     const bodyFormData = new FormData();
     bodyFormData.append("cartoonId", commentDto.cartoonId!!);
     bodyFormData.append("comment", commentDto.comment!!)
