@@ -22,6 +22,7 @@
 import {ref} from "vue";
 import LoginForm from "../components/login/LoginForm.vue";
 import {createUser, loginUser} from "../services/BackendClient";
+import {setCurrentUser} from "../services/UsernameService";
 
 const isSignIn = ref(true);
 
@@ -31,7 +32,10 @@ const signInInputs = new Map([
     ['Password', () => true],
 ]);
 const onSignInFail = (v) => console.log(v);
-const onSignIn = async (form) => await loginUser(form.username, form.password);
+const onSignIn = async (form) => {
+    await loginUser(form.username, form.password);
+    setCurrentUser()
+}
 
 // Sign Up Form
 const signUpInputs = new Map([
@@ -40,7 +44,10 @@ const signUpInputs = new Map([
     ['Confirm Password', () => true],
 ]);
 const onSignUpFail = (v) => console.log(v);
-const onSignUp = async (form) => await createUser(form.username, form.password);
+const onSignUp = async (form) => {
+    await createUser(form.username, form.password);
+    setCurrentUser();
+}
 
 </script>
 

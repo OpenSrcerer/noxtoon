@@ -9,6 +9,8 @@ const postHeaderConfig = {
     withCredentials: true
 };
 
+// CARTOONS
+
 export const getCartoons = async () => {
     return (await axios.get("http://localhost:1718/controllers/cartoons/get_cartoons.php",
         { withCredentials: true }
@@ -75,6 +77,11 @@ export const updateCartoonStats = async (dto: ButtonClickDto) => {
 }
 
 // USER REQUESTS
+
+export const logoutUser = async () => {
+    return axios.get("http://localhost:1718/controllers/users/get_logout.php",
+      { withCredentials: true });
+}
 
 export const createUser = async (username: string, password: string) => {
     return doOnUser(username, password, "post_user")

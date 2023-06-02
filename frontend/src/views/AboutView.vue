@@ -35,13 +35,7 @@
 </template>
 
 <script>
-import {defineComponent} from "vue";
-import Footer from "@/components/nav/Footer.vue";
-import Header from "@/App.vue";
 
-export default defineComponent({
-  components: {Header, Footer}
-})
 </script>
 
 <style scoped>

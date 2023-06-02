@@ -8,12 +8,16 @@
       <div id="nav-header-container-right">
         <RouterLink to="/about">ABOUT</RouterLink>
         <RouterLink to="/search">SEARCH TOONS</RouterLink>
+        <UserDropdown v-if="currentUsername.length" :name="currentUsername" @sign-out="setCurrentUser"/>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import UserDropdown from "./UserDropdown.vue";
+import {currentUsername, setCurrentUser} from "../../services/UsernameService";
+
 const scrollToTop = () => {
   window.scrollTo({
     top: 0,
@@ -53,10 +57,12 @@ a:hover {
   justify-content: center;
   z-index: 255;
   position: fixed;
+  min-width: 650px;
 }
 
 #nav-header-container {
   display: flex;
+  align-items: center;
 }
 
 #nav-header-container > div {
@@ -66,12 +72,14 @@ a:hover {
 }
 
 #nav-header-container-right {
-  height: inherit;
   justify-content: right;
 }
 
+#nav-header-container-right > div {
+  justify-content: center;
+}
+
 #nav-header-container-left {
-  height: inherit;
   justify-content: left;
 }
 
@@ -88,7 +96,11 @@ a:hover {
 }
 
 #nav-header-container-right > :last-child {
-  margin-right: 2em;
+  margin-right: 2.5rem;
+}
+
+#nav-header-container-right > :nth-child(2) {
   width: 7em;
 }
+
 </style>
