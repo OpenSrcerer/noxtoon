@@ -1,21 +1,31 @@
 <template>
-    <br><br>
-    <hr>
-    <h1 @click="isSignIn = !isSignIn">toggle</h1>
-    <hr>
-    <br>
+  <div id="login-screen">
 
-    <LoginForm v-if="isSignIn"
-               @submit-fail="onSignInFail"
-               @submit-success="onSignIn"
-               submit-name="Sign In"
-               :inputs="signInInputs"/>
+    <img src="../assets/img/misc/clippy-hello.gif"/>
 
-    <LoginForm v-else
-               @submit-fail="onSignUpFail"
-               @submit-success="onSignUp"
-               submit-name="Sign Up"
-               :inputs="signUpInputs"/>
+    <div id="login-container">
+      <img id="logo" src="../assets/img/parallax/logo-wide.png">
+
+      <hr>
+
+      <div v-if="isSignIn">
+        <LoginForm :inputs="signInInputs"
+                   @submit-fail="onFailure"
+                   @submit-success="onSignIn"
+                   submit-name="Sign In"/>
+        <p>Don't have an account? <span @click="isSignIn = false">Sign Up</span></p>
+      </div>
+
+      <div v-else>
+        <LoginForm :inputs="signUpInputs"
+                   @submit-fail="onFailure"
+                   @submit-success="onSignUp"
+                   submit-name="Sign Up"/>
+        <p>Already have an account? <span @click="isSignIn = true">Sign In</span></p>
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <script setup lang="ts">
@@ -28,10 +38,9 @@ const isSignIn = ref(true);
 
 // Sign In Form
 const signInInputs = new Map([
-    ['Username', () => true],
-    ['Password', () => true],
+    [{ name: "Username", hidden: false }, () => true],
+    [{ name: 'Password', hidden: true }, () => true],
 ]);
-const onSignInFail = (v) => console.log(v);
 const onSignIn = async (form) => {
     await loginUser(form.username, form.password);
     setCurrentUser()
@@ -39,18 +48,62 @@ const onSignIn = async (form) => {
 
 // Sign Up Form
 const signUpInputs = new Map([
-    ['Username', () => true],
-    ['Password', () => true],
-    ['Confirm Password', () => true],
+    [{ name: "Username", hidden: false }, () => true],
+    [{ name: 'Password', hidden: true }, () => true],
+    [{ name: 'Confirm Password', hidden: true }, () => true],
 ]);
-const onSignUpFail = (v) => console.log(v);
 const onSignUp = async (form) => {
     await createUser(form.username, form.password);
     setCurrentUser();
 }
 
+const onFailure = (e) => console.log(e);
+
 </script>
 
 <style scoped>
+img {
+  max-width: 10rem;
+}
 
+#login-screen {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 5rem;
+  height: 100vh;
+  user-select: none;
+}
+
+hr {
+  width: 100%;
+  border: 1px solid var(--nx-c-orange);
+  margin-top: 3rem;
+}
+
+#login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#logo {
+  max-width: 20rem;
+  transition: all 250ms ease-in-out;
+}
+
+#logo:hover {
+  transform: rotate(15deg);
+}
+
+span {
+  user-select: none;
+  color: var(--nx-c-orange);
+  text-decoration: underline;
+  cursor: pointer;
+}
 </style>

@@ -1,13 +1,11 @@
 <template>
   <div id="login-form">
-    <h1>Login Form</h1>
-
-    <div :id="'form-' + input[0].toLowerCase()" v-for="input in inputs.entries()">
-        <h2>{{ input[0] }}</h2>
-        <input v-model="formData[input[0].toLowerCase()]" type="text" maxlength="30"/>
+    <div :id="'form-' + input[0].name.toLowerCase()" v-for="input in inputs.entries()">
+      <h2>{{ input[0].name }}</h2>
+      <input v-model="formData[input[0].name.toLowerCase()]" type="text" maxlength="30"/>
     </div>
 
-    <h1 @click="validateAndEmit">{{ submitName }}</h1>
+    <button @click="validateAndEmit">{{ submitName }}</button>
   </div>
 </template>
 
@@ -15,8 +13,13 @@
 
 import {reactive} from "vue";
 
+interface LoginForm {
+  name: string;
+  hidden: boolean;
+}
+
 interface LoginFormProps {
-    inputs: Map<string, (v) => boolean>, // input name, validation
+    inputs: Map<LoginForm, (v) => boolean>, // input name, validation
     submitName: string
 }
 
@@ -26,8 +29,8 @@ const emit = defineEmits(['submitFail', 'submitSuccess'])
 
 const validateAndEmit = () => {
     for (const [input, validator] of props.inputs.entries()) {
-        if (!validator(input)) {
-            emit('submitFail', `Field ${input} is invalid!`);
+        if (!validator(formData[input.name])) {
+            emit('submitFail', input.name);
             return;
         }
     }
@@ -38,10 +41,44 @@ const validateAndEmit = () => {
 
 <style scoped>
 #login-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+button {
+  font-size: 1.5rem;
+  font-family: var(--nx-f-inter);
+  margin-top: 2rem;
+  border-radius: .5rem;
+  padding: .5rem 1rem;
+  transition: .5s;
+  cursor: pointer;
+  color: var(--nx-c-smoke);
+  background-color: var(--nx-c-gray-hover);
+  border: 1px solid var(--nx-c-gray-card-hover);
+}
+
+button:hover {
+  background-color: var(--nx-c-orange);
+  border: 1px solid var(--nx-c-orange);
+  color: var(--nx-c-near-black);
+}
+
+input {
+  border-radius: .25rem;
+  transition: .5s;
+  width: 15rem;
+  min-height: 2.5rem;
+  font-family: var(--nx-f-inter);
+  text-align: center;
+  background-color: var(--nx-c-gray-hover);
+  border: 1px solid var(--nx-c-gray-card-hover);
+  color: white;
+}
+
+h2 {
+  margin-bottom: .5rem;
+}
 
 </style>

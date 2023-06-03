@@ -1,11 +1,15 @@
-<script setup>
-import Header from "@/components/nav/Header.vue";
-</script>
-
 <template>
-  <Header/>
+  <Header v-if="shouldShowHeader"/>
   <router-view/>
 </template>
+
+<script setup>
+import Header from "@/components/nav/Header.vue";
+import {computed} from "vue";
+import {currentUsername} from "./services/UsernameService";
+
+const shouldShowHeader = computed(() => !!currentUsername.value.length)
+</script>
 
 <style>
 body {
