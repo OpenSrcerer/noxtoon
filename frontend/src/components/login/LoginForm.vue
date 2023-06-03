@@ -2,7 +2,7 @@
   <div id="login-form">
     <div :id="'form-' + input[0].name.toLowerCase()" v-for="input in inputs.entries()">
       <h2>{{ input[0].name }}</h2>
-      <input v-model="formData[input[0].name.toLowerCase()]" type="text" maxlength="30"/>
+      <input v-model="formData[input[0].name.toLowerCase()]" :type="input[0].hidden ? 'password' : 'text'" maxlength="30"/>
     </div>
 
     <button @click="validateAndEmit">{{ submitName }}</button>
@@ -66,6 +66,7 @@ button:hover {
 }
 
 input {
+  font-size: 1rem;
   border-radius: .25rem;
   transition: .5s;
   width: 15rem;
