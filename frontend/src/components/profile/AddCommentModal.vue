@@ -4,7 +4,7 @@
   <div v-if="modalActive" id="comment-form">
     <h1>Comment</h1>
     <textarea v-model="formData.comment" maxlength="750"/>
-    <h1 @click="onSubmit">Submit</h1>
+    <h1 id="submit-button" @click="onSubmit">Submit</h1>
   </div>
 
   <div v-else id="add-comment-button" @click="modalActive = !modalActive">
@@ -152,5 +152,19 @@ div > textarea {
 
 input[type="search"]::-webkit-search-cancel-button {
   filter: invert(1);
+}
+
+#submit-button {
+  user-select: none;
+  cursor: pointer;
+  transition: .5s;
+  padding-right: .25rem;
+  padding-left: .25rem;
+  border-radius: .5rem;
+}
+
+#submit-button:hover {
+  background-color: var(--nx-c-orange);
+  color: var(--nx-c-near-black);
 }
 </style>
