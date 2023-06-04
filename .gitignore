@@ -1,3 +1,8 @@
-node_modules/
-.idea/
-/dist/
+/.idea/*
+/backend/.idea/.gitignore
+/backend/.idea/backend.iml
+/backend/.idea/discord.xml
+/backend/.idea/modules.xml
+/backend/.idea/php.xml
+/backend/.idea/sqldialects.xml
+/backend/.idea/vcs.xml
