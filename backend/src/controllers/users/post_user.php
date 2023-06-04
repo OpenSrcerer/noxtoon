@@ -5,13 +5,11 @@ namespace models;
 global $cookie_secret;
 
 include "../../common/response_headers.php";
+include "../../common/validate_credentials.php";
 include "../../repositories/user_repository.php";
 include "../../security/constants.php";
 
-if (
-    !isset($_POST['username']) ||
-    !isset($_POST['password'])
-) {
+if (invalid_credentials()) {
     http_response_code(400);
     exit;
 }

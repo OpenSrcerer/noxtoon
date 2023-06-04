@@ -45,7 +45,7 @@ const validateAndEmit = () => {
         return;
     }
 
-    if (!lengthVal.value || ((!lowerUpperVal.value || !specialVal.value) && props.submitName === 'Sign Up')) {
+    if (!lengthVal.value || ((!lowerUpperVal.value || !specialVal.value)/* && props.submitName === 'Sign Up'*/)) {
         alert("Check that your password meets the requirements!");
         return;
     }
