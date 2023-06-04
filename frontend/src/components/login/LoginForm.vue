@@ -3,6 +3,18 @@
     <div :id="'form-' + input[0].name.toLowerCase()" v-for="input in inputs.entries()">
       <h2>{{ input[0].name }}</h2>
       <input v-model="formData[input[0].name.toLowerCase()]" :type="input[0].hidden ? 'password' : 'text'" maxlength="30"/>
+
+      <div v-if="
+      input[0].name === 'Password' &&
+      !!formData[input[0].name.toLowerCase()] &&
+      submitName === 'Sign Up'
+      ">
+        <ul>
+          <li :class="lengthVal ? 'complete' : ''">At least 6 characters</li>
+          <li :class="lowerUpperVal ? 'complete' : ''">At least one UPPERCASE and lowercase character</li>
+          <li :class="specialVal ? 'complete' : ''">At least one special character</li>
+        </ul>
+      </div>
     </div>
 
     <button @click="validateAndEmit">{{ submitName }}</button>
@@ -11,7 +23,7 @@
 
 <script setup lang="ts">
 
-import {reactive} from "vue";
+import {computed, reactive} from "vue";
 
 interface LoginForm {
   name: string;
@@ -28,22 +40,59 @@ const props = defineProps<LoginFormProps>();
 const emit = defineEmits(['submitFail', 'submitSuccess'])
 
 const validateAndEmit = () => {
+    if ((formData['username'] ?? '').length < 3) {
+        alert("Your username must be at least three characters long!");
+        return;
+    }
+
+    if (!lengthVal.value || ((!lowerUpperVal.value || !specialVal.value) && props.submitName === 'Sign Up')) {
+        alert("Check that your password meets the requirements!");
+        return;
+    }
+
+    if (props.submitName !== 'Sign In' && formData['password'] !== formData['confirm password']) {
+        alert("Your passwords must match!");
+        return;
+    }
+
     for (const [input, validator] of props.inputs.entries()) {
         if (!validator(formData[input.name])) {
             emit('submitFail', input.name);
             return;
         }
     }
+
     emit('submitSuccess', formData);
 }
+
+// Password Validation
+const lengthVal = computed(() => (formData['password'] ?? '').length >= 6)
+const lowerUpperVal = computed(() =>
+    (formData['password'] ?? '').match(/[a-z]/g) &&
+    (formData['password'] ?? '').match(/[A-Z]/g)
+)
+const specialVal = computed(() => (formData['password'] ?? '').match(/[^a-zA-Z0-9]/g))
 
 </script>
 
 <style scoped>
+ul {
+  text-align: left;
+}
+
+li:not(.complete) {
+  font-weight: bold;
+}
+
+li.complete {
+  text-decoration: line-through;
+}
+
 #login-form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 400px;
 }
 
 button {

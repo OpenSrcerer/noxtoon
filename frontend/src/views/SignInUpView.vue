@@ -1,10 +1,10 @@
 <template>
   <div id="login-screen">
-
-    <img src="../assets/img/misc/clippy-hello.gif"/>
-
     <div id="login-container">
-      <img id="logo" src="../assets/img/parallax/logo-wide.png">
+      <div id="clippy-logo">
+        <img id="clippy" src="../assets/img/misc/clippy-hello.gif"/>
+        <img id="logo" src="../assets/img/parallax/logo-wide.png">
+      </div>
 
       <hr>
 
@@ -66,6 +66,12 @@ img {
   max-width: 10rem;
 }
 
+h1 {
+  font-size: 5rem;
+  word-break: break-all;
+  text-align: right;
+}
+
 #login-screen {
   display: flex;
   flex-direction: row;
@@ -75,6 +81,7 @@ img {
   column-gap: 5rem;
   height: 100vh;
   user-select: none;
+  margin-top: -5rem;
 }
 
 hr {
@@ -105,5 +112,21 @@ span {
   color: var(--nx-c-orange);
   text-decoration: underline;
   cursor: pointer;
+}
+
+#clippy-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+#clippy {
+  opacity: 0;
+  transition: .5s;
+}
+
+#clippy-logo:hover > #clippy {
+  opacity: 100;
 }
 </style>
